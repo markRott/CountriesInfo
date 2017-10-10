@@ -1,4 +1,6 @@
-package com.example;
+package com.example.usecases;
+
+import com.example.interfaces.IPostExecutionThread;
 
 import io.reactivex.Flowable;
 import io.reactivex.disposables.CompositeDisposable;

@@ -1,4 +1,6 @@
-package com.example;
+package com.example.interfaces;
+
+import com.example.models.CountryDomainModel;
 
 import java.util.List;
 
