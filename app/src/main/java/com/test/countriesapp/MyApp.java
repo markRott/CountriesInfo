@@ -7,6 +7,9 @@ import com.test.countriesapp.dagger2.ComponentsHelper;
 import com.test.countriesapp.dagger2.app.MyAppComponent;
 import com.test.countriesapp.dagger2.countries.CountriesComponent;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by sma on 10.10.17.
  */
@@ -19,6 +22,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initRealm();
         initLeak();
         initAppComponent();
     }
@@ -44,5 +48,11 @@ public class MyApp extends Application {
 
     private void initAppComponent() {
         appComponent = ComponentsHelper.initMyAppComponent(this);
+    }
+
+    private void initRealm() {
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name("dogapp.realm").build();
+        Realm.setDefaultConfiguration(config);
     }
 }

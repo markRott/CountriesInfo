@@ -1,7 +1,5 @@
 package com.example.models;
 
-import java.util.List;
-
 /**
  * Created by sma on 10.10.17.
  */
@@ -15,7 +13,7 @@ public class CountryDomainModel {
     private String capital;
     private String countryName;
     private String numericCode;
-    private List<String> borders;
+//    private List<String> borders;
 
     public void setArea(double area) {
         this.area = area;
@@ -45,9 +43,9 @@ public class CountryDomainModel {
         this.numericCode = numericCode;
     }
 
-    public void setBorders(List<String> borders) {
-        this.borders = borders;
-    }
+//    public void setBorders(List<String> borders) {
+//        this.borders = borders;
+//    }
 
     public double getArea() {
         return area;
@@ -77,9 +75,9 @@ public class CountryDomainModel {
         return numericCode;
     }
 
-    public List<String> getBorders() {
-        return borders;
-    }
+//    public List<String> getBorders() {
+//        return borders;
+//    }
 
     @Override
     public String toString() {
@@ -91,7 +89,6 @@ public class CountryDomainModel {
                 ", capital='" + capital + '\'' +
                 ", countryName='" + countryName + '\'' +
                 ", numericCode='" + numericCode + '\'' +
-                ", borders=" + borders +
                 '}';
     }
 }

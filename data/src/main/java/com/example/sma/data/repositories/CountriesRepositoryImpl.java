@@ -3,8 +3,7 @@ package com.example.sma.data.repositories;
 import com.example.interfaces.ICountryRepository;
 import com.example.models.CountryDomainModel;
 import com.example.sma.data.entities.CountryEntity;
-import com.example.sma.data.fetchdata.ICountriesFetchData;
-import com.example.sma.data.mappers.ConvertCountryEntityToDomainModel;
+import com.example.sma.data.mappers.CountryEntityToDomainModel;
 
 import java.util.List;
 
@@ -18,18 +17,20 @@ import io.reactivex.functions.Function;
 
 public class CountriesRepositoryImpl implements ICountryRepository {
 
-    private ICountriesFetchData countriesData;
-    private ConvertCountryEntityToDomainModel converter;
+    private CountryEntityToDomainModel converter;
+    private CountriesDataFactory dataFactory;
 
-    public CountriesRepositoryImpl(ConvertCountryEntityToDomainModel mapper, ICountriesFetchData data) {
+    public CountriesRepositoryImpl(
+            CountryEntityToDomainModel mapper,
+            CountriesDataFactory countriesDataFactory) {
         this.converter = mapper;
-        this.countriesData = data;
+        this.dataFactory = countriesDataFactory;
     }
 
     @Override
     public Flowable<List<CountryDomainModel>> getCountries() {
 
-        return countriesData.countriesEntity().map(new MapOperator());
+        return dataFactory.getDataProvider().countriesEntity().map(new MapOperator());
     }
 
     private class MapOperator implements Function<List<CountryEntity>, List<CountryDomainModel>> {

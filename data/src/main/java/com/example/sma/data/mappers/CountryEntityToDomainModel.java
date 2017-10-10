@@ -11,7 +11,7 @@ import java.util.List;
  * Created by sma on 10.10.17.
  */
 
-public class ConvertCountryEntityToDomainModel {
+public class CountryEntityToDomainModel {
 
     public CountryDomainModel transform(CountryEntity entity) {
         CountryDomainModel model = null;
@@ -24,7 +24,7 @@ public class ConvertCountryEntityToDomainModel {
             model.setCapital(entity.getCapital());
             model.setCountryName(entity.getName());
             model.setNumericCode(entity.getNumericCode());
-            model.setBorders(entity.getBorders());
+//            model.setBorders(entity.getBorders());
         }
         return model;
     }

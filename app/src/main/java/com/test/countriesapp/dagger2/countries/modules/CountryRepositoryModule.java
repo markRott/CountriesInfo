@@ -2,9 +2,9 @@ package com.test.countriesapp.dagger2.countries.modules;
 
 import com.example.interfaces.ICountryRepository;
 import com.example.sma.data.IApplicationApi;
-import com.example.sma.data.fetchdata.FetchCountriesDataImpl;
-import com.example.sma.data.fetchdata.ICountriesFetchData;
-import com.example.sma.data.mappers.ConvertCountryEntityToDomainModel;
+import com.example.sma.data.cache.ICache;
+import com.example.sma.data.mappers.CountryEntityToDomainModel;
+import com.example.sma.data.repositories.CountriesDataFactory;
 import com.example.sma.data.repositories.CountriesRepositoryImpl;
 import com.test.countriesapp.dagger2.countries.CountriesScope;
 
@@ -20,24 +20,24 @@ public class CountryRepositoryModule {
 
     @Provides
     @CountriesScope
-    public ConvertCountryEntityToDomainModel provideMapper() {
-        return new ConvertCountryEntityToDomainModel();
+    public CountryEntityToDomainModel provideMapper() {
+
+        return new CountryEntityToDomainModel();
     }
 
     @Provides
     @CountriesScope
-    public ICountriesFetchData provideFetchDada(IApplicationApi api) {
-        return new FetchCountriesDataImpl(api);
+    public CountriesDataFactory provideCountriesDataFactory(ICache cache, IApplicationApi api) {
+
+        return new CountriesDataFactory(cache, api);
     }
 
     @Provides
     @CountriesScope
     public ICountryRepository provideCountryRepository(
-            ConvertCountryEntityToDomainModel mapper,
-            ICountriesFetchData fetchData
-    ) {
+            CountryEntityToDomainModel mapper,
+            CountriesDataFactory countriesDataFactory) {
 
-        return new CountriesRepositoryImpl(mapper, fetchData);
+        return new CountriesRepositoryImpl(mapper, countriesDataFactory);
     }
-
 }

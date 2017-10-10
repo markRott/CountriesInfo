@@ -10,7 +10,7 @@ import io.reactivex.Flowable;
  * Created by sma on 10.10.17.
  */
 
-public interface ICountriesFetchData {
+public interface ICountriesDataProvider {
 
     Flowable<List<CountryEntity>> countriesEntity();
 }
