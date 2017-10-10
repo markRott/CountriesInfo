@@ -1,4 +1,4 @@
-package com.test.countriesapp.countries;
+package com.test.countriesapp.countries.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -27,5 +27,11 @@ public class CountriesAdapter extends BaseRecyclerAdapter<CountryDomainModel, Co
     @Override
     public void onBindViewHolder(CountryItemAdapterHolder holder, int position) {
 
+        fillData(holder, position);
+    }
+
+    private void fillData(CountryItemAdapterHolder holder, int position) {
+        final CountryDomainModel model = getItemByPosition(position);
+        holder.tvCountryName.setText(model.getCountryName());
     }
 }

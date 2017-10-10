@@ -12,8 +12,13 @@ import butterknife.OnClick;
 
 public class InfoActivity extends BaseActivity implements IInfoView {
 
-    //    @InjectPresenter
-    InfoPresenter infoPresenter;
+//    @InjectPresenter
+//    InfoPresenter infoPresenter;
+
+    @Override
+    public void inject() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

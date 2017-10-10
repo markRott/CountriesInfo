@@ -1,4 +1,4 @@
-package com.test.countriesapp.countries;
+package com.test.countriesapp.countries.adapter;
 
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;

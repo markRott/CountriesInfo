@@ -13,7 +13,6 @@ import ru.terrakok.cicerone.commands.Replace;
 /**
  * Created by sma on 10.10.17.
  */
-
 public class MainActivity extends BaseActivity {
 
     @Override
@@ -22,8 +21,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_holder);
 
         if (savedInstanceState == null) {
+            getMyApp().initCountriesComponent();
             navigator.applyCommand(new Replace(Const.ScreenKey.COUNTRIES, null));
         }
+    }
+
+    @Override
+    public void inject() {
+        getMyAppComponent().inject(this);
     }
 
     @Override
