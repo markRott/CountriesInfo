@@ -1,4 +1,4 @@
-package com.example.sma.data;
+package com.example.sma.data.entities;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by sma on 10.10.17.
  */
 
-public class Language {
+public class LanguageEntity {
 
     @SerializedName("iso639_1")
     private String iso6391;

@@ -1,4 +1,4 @@
-package com.example.sma.data;
+package com.example.sma.data.entities;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -47,15 +47,15 @@ public class CountryEntity {
     @SerializedName("numericCode")
     private String numericCode;
     @SerializedName("currencies")
-    private List<Currency> currencies;
+    private List<CurrencyEntity> currencies;
     @SerializedName("languages")
-    private List<Language> languages;
+    private List<LanguageEntity> languages;
     @SerializedName("translations")
-    private Translations translations;
+    private TranslationsEntity translations;
     @SerializedName("flag")
     private String flag;
     @SerializedName("regionalBlocs")
-    private List<RegionalBloc> regionalBlocs;
+    private List<RegionalBlocEntity> regionalBlocs;
     @SerializedName("cioc")
     private String cioc;
 
@@ -132,15 +132,15 @@ public class CountryEntity {
         this.numericCode = numericCode;
     }
 
-    public void setCurrencies(List<Currency> currencies) {
+    public void setCurrencies(List<CurrencyEntity> currencies) {
         this.currencies = currencies;
     }
 
-    public void setLanguages(List<Language> languages) {
+    public void setLanguages(List<LanguageEntity> languages) {
         this.languages = languages;
     }
 
-    public void setTranslations(Translations translations) {
+    public void setTranslations(TranslationsEntity translations) {
         this.translations = translations;
     }
 
@@ -148,7 +148,7 @@ public class CountryEntity {
         this.flag = flag;
     }
 
-    public void setRegionalBlocs(List<RegionalBloc> regionalBlocs) {
+    public void setRegionalBlocs(List<RegionalBlocEntity> regionalBlocs) {
         this.regionalBlocs = regionalBlocs;
     }
 
@@ -228,15 +228,15 @@ public class CountryEntity {
         return numericCode;
     }
 
-    public List<Currency> getCurrencies() {
+    public List<CurrencyEntity> getCurrencies() {
         return currencies;
     }
 
-    public List<Language> getLanguages() {
+    public List<LanguageEntity> getLanguages() {
         return languages;
     }
 
-    public Translations getTranslations() {
+    public TranslationsEntity getTranslations() {
         return translations;
     }
 
@@ -244,7 +244,7 @@ public class CountryEntity {
         return flag;
     }
 
-    public List<RegionalBloc> getRegionalBlocs() {
+    public List<RegionalBlocEntity> getRegionalBlocs() {
         return regionalBlocs;
     }
 
