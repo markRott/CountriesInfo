@@ -14,5 +14,9 @@
 /build/
 /data/build/
 /data/data.iml
-/domain/build/
 /domain/domain.iml
+libs/
+src/main/res/drawable/
+/app/build/
+/app/app.iml
+/domain/build/
