@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
-import com.test.countriesapp.CollectionsUtil;
+import com.test.countriesapp.utils.CollectionsUtil;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseDividerItemDecoration;
 import com.test.countriesapp.base.BaseFragment;

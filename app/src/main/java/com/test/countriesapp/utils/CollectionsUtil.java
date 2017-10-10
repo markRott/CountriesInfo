@@ -1,4 +1,4 @@
-package com.test.countriesapp;
+package com.test.countriesapp.utils;
 
 import java.util.Collection;
 import java.util.Map;
