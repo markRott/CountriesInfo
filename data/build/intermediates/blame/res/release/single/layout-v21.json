@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/sma/education/countries/dog-test-app/CountriesApp/data/build/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/sma/.android/build-cache/c97c6f2b07e436879b35d289ad9c32e47edcbdaf/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/sma/education/countries/dog-test-app/CountriesApp/data/build/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/sma/.android/build-cache/c97c6f2b07e436879b35d289ad9c32e47edcbdaf/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/sma/education/countries/dog-test-app/CountriesApp/data/build/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/sma/.android/build-cache/c97c6f2b07e436879b35d289ad9c32e47edcbdaf/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/sma/education/countries/dog-test-app/CountriesApp/data/build/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/Users/sma/.android/build-cache/c97c6f2b07e436879b35d289ad9c32e47edcbdaf/output/res/layout-v21/notification_action.xml"
+    }
+]

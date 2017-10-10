@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.sma.data.ExampleUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-10T09:41:59" hostname="MacBook-Pro-sma.local" time="0.001">
+  <properties/>
+  <testcase name="addition_isCorrect" classname="com.example.sma.data.ExampleUnitTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
