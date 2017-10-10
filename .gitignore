@@ -12,3 +12,7 @@
 /gradlew
 /gradlew.bat
 /build/
+/data/build/
+/data/data.iml
+/domain/build/
+/domain/domain.iml
