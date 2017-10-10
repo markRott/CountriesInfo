@@ -10,12 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
+import com.test.countriesapp.CollectionsUtil;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseDividerItemDecoration;
 import com.test.countriesapp.base.BaseFragment;
+import com.test.countriesapp.base.IRecyclerItemTouchListener;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +32,8 @@ import static com.test.countriesapp.base.BaseDividerItemDecoration.VERTICAL_LIST
  * Created by sma on 10.10.17.
  */
 
-public class CountriesFragment extends BaseFragment implements ICountriesView {
+public class CountriesFragment extends BaseFragment
+        implements ICountriesView, IRecyclerItemTouchListener<CountryDomainModel> {
 
     @BindView(R.id.prb_countries)
     ProgressBar pbCountries;
@@ -34,6 +41,11 @@ public class CountriesFragment extends BaseFragment implements ICountriesView {
     RecyclerView rcvCountries;
     @BindView(R.id.tv_error_msg)
     TextView tvErrorMessage;
+
+    @Inject
+    CountriesAdapter countriesAdapter;
+    @InjectPresenter
+    CountriesPresenter countriesPresenter;
 
     public static CountriesFragment newInstance() {
         return new CountriesFragment();
@@ -66,7 +78,7 @@ public class CountriesFragment extends BaseFragment implements ICountriesView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        rcvUsers.setAdapter(null);
+        rcvCountries.setAdapter(null);
     }
 
     @Override
@@ -87,19 +99,24 @@ public class CountriesFragment extends BaseFragment implements ICountriesView {
 
     @Override
     public void hideErrorMessage() {
-//        tvErrorMessage.setText(null);
         tvErrorMessage.setVisibility(View.GONE);
     }
 
     @Override
     public void renderCountriesList(Collection<CountryDomainModel> countryList) {
+        if (CollectionsUtil.isNullOrEmpty(countryList)) return;
+        countriesAdapter.setData(new ArrayList<>(countryList));
+        countriesAdapter.setItemTouchListener(this);
+    }
 
+    @Override
+    public void onTouch(int position, CountryDomainModel data) {
+//        usersPresenter.onOpenDetailScreen(data.getUserId());
     }
 
     private void setupRecyclerView() {
         rcvCountries.setLayoutManager(new LinearLayoutManager(getContext()));
         rcvCountries.addItemDecoration(new BaseDividerItemDecoration(getContext(), VERTICAL_LIST));
-        // TODO need adapter
-        rcvCountries.setAdapter(null);
+        rcvCountries.setAdapter(countriesAdapter);
     }
 }
