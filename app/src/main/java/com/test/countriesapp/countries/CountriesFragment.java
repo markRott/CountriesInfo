@@ -12,11 +12,12 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
-import com.test.countriesapp.utils.CollectionsUtil;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseDividerItemDecoration;
 import com.test.countriesapp.base.BaseFragment;
 import com.test.countriesapp.base.IRecyclerItemTouchListener;
+import com.test.countriesapp.countries.adapter.CountriesAdapter;
+import com.test.countriesapp.utils.CollectionsUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,7 +49,13 @@ public class CountriesFragment extends BaseFragment
     CountriesPresenter countriesPresenter;
 
     public static CountriesFragment newInstance() {
+
         return new CountriesFragment();
+    }
+
+    @Override
+    public void inject() {
+        getCountriesComponent().inject(this);
     }
 
     @Override
@@ -72,7 +79,7 @@ public class CountriesFragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        setDataForPresenter();
+        setDataForPresenter();
     }
 
     @Override
@@ -118,5 +125,11 @@ public class CountriesFragment extends BaseFragment
         rcvCountries.setLayoutManager(new LinearLayoutManager(getContext()));
         rcvCountries.addItemDecoration(new BaseDividerItemDecoration(getContext(), VERTICAL_LIST));
         rcvCountries.setAdapter(countriesAdapter);
+    }
+
+    private void setDataForPresenter() {
+        countriesPresenter
+                .setRouter(getCountriesComponent().router())
+                .setCountriesUseCase(getCountriesComponent().countriesUseCase());
     }
 }

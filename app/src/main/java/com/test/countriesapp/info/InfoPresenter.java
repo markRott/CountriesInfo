@@ -10,10 +10,6 @@ import com.test.countriesapp.base.BasePresenter;
 @InjectViewState
 public class InfoPresenter extends BasePresenter<IInfoView> {
 
-//    Router router;
-
     public void openCountriesScreen() {
-//        if (router == null) return;
-//        router.navigateTo(Const.ScreenKey.COUNTRIES);
     }
 }

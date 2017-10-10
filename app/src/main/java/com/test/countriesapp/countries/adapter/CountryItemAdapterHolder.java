@@ -1,4 +1,4 @@
-package com.test.countriesapp.countries;
+package com.test.countriesapp.countries.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

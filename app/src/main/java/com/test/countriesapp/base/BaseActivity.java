@@ -31,7 +31,11 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         inject();
     }
 
+    public MyApp getMyApp() {
+        return (MyApp) getApplication();
+    }
+
     public MyAppComponent getMyAppComponent() {
-        return ((MyApp) getApplication()).getAppComponent();
+        return getMyApp().getAppComponent();
     }
 }

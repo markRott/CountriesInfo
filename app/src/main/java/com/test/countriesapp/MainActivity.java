@@ -21,6 +21,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_holder);
 
         if (savedInstanceState == null) {
+            getMyApp().initCountriesComponent();
             navigator.applyCommand(new Replace(Const.ScreenKey.COUNTRIES, null));
         }
     }

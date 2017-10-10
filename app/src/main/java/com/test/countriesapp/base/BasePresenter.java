@@ -9,5 +9,11 @@ import com.arellomobile.mvp.MvpView;
 
 public abstract class BasePresenter<View extends MvpView> extends MvpPresenter<View> {
 
+//    public abstract void inject();
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+//        inject();
+    }
 }
