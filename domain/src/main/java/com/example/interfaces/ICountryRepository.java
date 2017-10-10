@@ -12,6 +12,5 @@ import io.reactivex.Flowable;
 
 public interface ICountryRepository {
 
-    //  Flowable<List<UserDomainModel>> getUsers();
     Flowable<List<CountryDomainModel>> getCountries();
 }

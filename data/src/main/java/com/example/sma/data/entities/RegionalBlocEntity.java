@@ -1,4 +1,4 @@
-package com.example.sma.data;
+package com.example.sma.data.entities;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by sma on 10.10.17.
  */
 
-public class RegionalBloc {
+public class RegionalBlocEntity {
 
     @SerializedName("acronym")
     private String acronym;
