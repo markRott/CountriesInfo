@@ -68,4 +68,6 @@ dependencies {
     compile "ru.terrakok.cicerone:cicerone:${rootProject.ext.cicerone}"
     debugCompile "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.debugCompileLeakcanary}"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.releaseCompileLeakcanary}"
+
+    compile "com.orhanobut:logger:${rootProject.ext.logger}"
 }

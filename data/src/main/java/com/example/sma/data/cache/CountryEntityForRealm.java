@@ -25,18 +25,6 @@ public class CountryEntityForRealm extends RealmObject {
     private String nativeName;
     private String numericCode;
 
-//    private TranslationsEntity translations;
-    //    private List<Double> latlng;
-//    private List<String> timezones;
-//    private List<String> borders;
-//    private List<String> altSpellings;
-//    private List<String> callingCodes;
-//    private List<RealmList> regionalBlocs;
-//    private RealmList<String> topLevelDomain;
-//    private List<CurrencyEntity> currencies;
-//    private List<LanguageEntity> languages;
-
-
     public void setName(String name) {
         this.name = name;
     }
@@ -93,10 +81,6 @@ public class CountryEntityForRealm extends RealmObject {
         this.numericCode = numericCode;
     }
 
-//    public void setTranslations(TranslationsEntity translations) {
-//        this.translations = translations;
-//    }
-
     public String getName() {
         return name;
     }
@@ -152,8 +136,4 @@ public class CountryEntityForRealm extends RealmObject {
     public String getNumericCode() {
         return numericCode;
     }
-
-//    public TranslationsEntity getTranslations() {
-//        return translations;
-//    }
 }

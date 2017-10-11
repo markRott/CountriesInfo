@@ -17,29 +17,27 @@ import io.reactivex.functions.Consumer;
 
 public class FetchCountriesDataFromNetworkImpl implements ICountriesDataProvider {
 
-    private final ICache realmCache;
+    private final ICache providerRealmCache;
     private final IApplicationApi api;
 
     public FetchCountriesDataFromNetworkImpl(ICache realmCache, IApplicationApi api) {
         this.api = api;
-        this.realmCache = realmCache;
+        this.providerRealmCache = realmCache;
     }
 
     @Override
     public Flowable<List<CountryEntity>> countriesEntity() {
         return api
                 .fetchAllCountries()
-                .doOnNext(new ConsumerImp());
+                .doOnNext(new SaveInDatabaseImp());
     }
 
-    private class ConsumerImp implements Consumer<List<CountryEntity>> {
+    private class SaveInDatabaseImp implements Consumer<List<CountryEntity>> {
         @Override
         public void accept(List<CountryEntity> countryEntities) throws Exception {
-            if (!realmCache.isCached()) {
-                final CountryEntityToRealmConverter mapper = new CountryEntityToRealmConverter();
-                final List<CountryEntityForRealm> realmList = mapper.transform(countryEntities);
-                realmCache.put(realmList);
-            }
+            final CountryEntityToRealmConverter mapper = new CountryEntityToRealmConverter();
+            final List<CountryEntityForRealm> realmList = mapper.transform(countryEntities);
+            providerRealmCache.put(realmList);
         }
     }
 }

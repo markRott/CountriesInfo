@@ -21,7 +21,6 @@ public class FetchCountriesDataFromCacheImpl implements ICountriesDataProvider {
 
     @Override
     public Flowable<List<CountryEntity>> countriesEntity() {
-
-        return realmCache.getCountries();
+        return Flowable.just(realmCache.getCountries());
     }
 }

@@ -3,6 +3,7 @@ package com.example.sma.data.repositories;
 import com.example.interfaces.ICountryRepository;
 import com.example.models.CountryDomainModel;
 import com.example.sma.data.entities.CountryEntity;
+import com.example.sma.data.fetchdata.ICountriesDataProvider;
 import com.example.sma.data.mappers.CountryEntityToDomainModel;
 
 import java.util.List;
@@ -29,15 +30,14 @@ public class CountriesRepositoryImpl implements ICountryRepository {
 
     @Override
     public Flowable<List<CountryDomainModel>> getCountries() {
-
-        return dataFactory.getDataProvider().countriesEntity().map(new MapOperator());
+        final ICountriesDataProvider provider = dataFactory.getDataProvider();
+        final Flowable<List<CountryEntity>> flowableList = provider.countriesEntity();
+        return flowableList.map(new MapOperator());
     }
 
     private class MapOperator implements Function<List<CountryEntity>, List<CountryDomainModel>> {
-
         @Override
         public List<CountryDomainModel> apply(@NonNull List<CountryEntity> countryEntities) throws Exception {
-
             return converter.transform(countryEntities);
         }
     }

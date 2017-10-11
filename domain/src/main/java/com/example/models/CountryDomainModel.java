@@ -13,7 +13,6 @@ public class CountryDomainModel {
     private String capital;
     private String countryName;
     private String numericCode;
-//    private List<String> borders;
 
     public void setArea(double area) {
         this.area = area;
@@ -43,10 +42,6 @@ public class CountryDomainModel {
         this.numericCode = numericCode;
     }
 
-//    public void setBorders(List<String> borders) {
-//        this.borders = borders;
-//    }
-
     public double getArea() {
         return area;
     }
@@ -74,10 +69,6 @@ public class CountryDomainModel {
     public String getNumericCode() {
         return numericCode;
     }
-
-//    public List<String> getBorders() {
-//        return borders;
-//    }
 
     @Override
     public String toString() {
