@@ -25,14 +25,18 @@
 
         <Button
             android:id="@+id/btn_load_countries"
+            style="@style/InfoScreenButton"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
             android:filterTouchesWhenObscured="true"
-            android:text="Load countries"
-            android:textAllCaps="false"
-            android:textColor="@color/text_black" />
+            android:text="@string/load_countries" />
+
+        <Button
+            android:id="@+id/btn_clear_cache"
+            style="@style/InfoScreenButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:filterTouchesWhenObscured="true"
+            android:text="@string/clear_cache" />
 
     </LinearLayout>
 

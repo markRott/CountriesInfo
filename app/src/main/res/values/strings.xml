@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CountriesApp</string>
+    <string name="msg_clear_cash">Clear cache</string>
+    <string name="msg_cache_is_empty">Cache is empty</string>
+    <string name="load_countries">Load countries</string>
+    <string name="clear_cache">Clear cache</string>
 </resources>

@@ -2,13 +2,14 @@ package com.test.countriesapp;
 
 import android.app.Application;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.test.countriesapp.dagger2.ComponentsHelper;
 import com.test.countriesapp.dagger2.app.MyAppComponent;
 import com.test.countriesapp.dagger2.countries.CountriesComponent;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 /**
  * Created by sma on 10.10.17.
@@ -22,6 +23,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Logger.addLogAdapter(new AndroidLogAdapter());
         initRealm();
         initLeak();
         initAppComponent();
@@ -43,16 +45,16 @@ public class MyApp extends Application {
     }
 
     public void initCountriesComponent() {
-        countriesComponent = ComponentsHelper.initCountriesComponent();
+        countriesComponent = ComponentsHelper.initCountriesComponent(appComponent);
     }
 
     private void initAppComponent() {
         appComponent = ComponentsHelper.initMyAppComponent(this);
     }
 
-    private void initRealm() {
+    public void initRealm() {
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().name("dogapp.realm").build();
-        Realm.setDefaultConfiguration(config);
+//        RealmConfiguration config = new RealmConfiguration.Builder().name("dogapp.realm").build();
+//        Realm.setDefaultConfiguration(config);
     }
 }

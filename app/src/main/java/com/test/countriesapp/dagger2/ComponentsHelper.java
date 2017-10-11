@@ -10,6 +10,7 @@ import com.test.countriesapp.dagger2.app.NavigationModule;
 import com.test.countriesapp.dagger2.app.UtilsModule;
 import com.test.countriesapp.dagger2.countries.CountriesComponent;
 import com.test.countriesapp.dagger2.countries.DaggerCountriesComponent;
+import com.test.countriesapp.dagger2.countries.modules.CacheModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesAdapterModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesUseCaseModule;
 import com.test.countriesapp.dagger2.countries.modules.CountryRepositoryModule;
@@ -20,26 +21,27 @@ import com.test.countriesapp.dagger2.countries.modules.CountryRepositoryModule;
 
 public class ComponentsHelper {
 
-    private static MyAppComponent myAppComponent;
-    private static CountriesComponent countriesComponent;
+//    private static MyAppComponent myAppComponent;
+//    private static CountriesComponent countriesComponent;
 
     private ComponentsHelper() {
     }
 
     public static MyAppComponent initMyAppComponent(MyApp myApplication) {
-        myAppComponent = DaggerMyAppComponent
+        MyAppComponent myAppComponent = DaggerMyAppComponent
                 .builder()
                 .contextModule(new ContextModule(myApplication))
                 .apiModule(new ApiModule())
                 .mainThreadModule(new MainThreadModule())
                 .utilsModule(new UtilsModule())
                 .navigationModule(new NavigationModule())
+                .cacheModule(new CacheModule())
                 .build();
         return myAppComponent;
     }
 
-    public static CountriesComponent initCountriesComponent() {
-        countriesComponent = DaggerCountriesComponent
+    public static CountriesComponent initCountriesComponent(MyAppComponent myAppComponent) {
+        CountriesComponent countriesComponent = DaggerCountriesComponent
                 .builder()
                 .myAppComponent(myAppComponent)
                 .countriesAdapterModule(new CountriesAdapterModule())

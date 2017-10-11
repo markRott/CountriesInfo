@@ -48,6 +48,7 @@ allprojects {
         cicerone = "2.1.0"
         debugCompileLeakcanary = "1.5.2"
         releaseCompileLeakcanary = "1.5.2"
+        logger = "2.1.1"
     }
 
 }

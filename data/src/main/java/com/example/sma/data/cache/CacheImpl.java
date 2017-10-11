@@ -1,12 +1,13 @@
 package com.example.sma.data.cache;
 
+import com.example.sma.data.RealmHolder;
 import com.example.sma.data.entities.CountryEntity;
 import com.example.sma.data.mappers.CountryRealmModelToEntity;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by sma on 10.10.17.
@@ -22,20 +23,17 @@ public class CacheImpl implements ICache {
 
     @Override
     public boolean isCached() {
-        final Realm realm = Realm.getDefaultInstance();
-        final boolean flag = realm
-                .where(CountryEntityForRealm.class).findAll() != null &&
-                realm.where(CountryEntityForRealm.class).findAll().size() > 0;
-
-        return flag;
+        final Realm realm = RealmHolder.getInstance().getRealm();
+        final RealmResults<CountryEntityForRealm> resp = realm.where(CountryEntityForRealm.class).findAll();
+        return resp != null && resp.size() > 0;
     }
 
     @Override
-    public Flowable<List<CountryEntity>> getCountries() {
+    public List<CountryEntity> getCountries() {
         final List<CountryEntityForRealm> list = Realm.getDefaultInstance()
                 .where(CountryEntityForRealm.class).findAll();
         final List<CountryEntity> entityList = countryRealmModelToEntity.transform(list);
-        return Flowable.just(entityList);
+        return entityList;
     }
 
     @Override

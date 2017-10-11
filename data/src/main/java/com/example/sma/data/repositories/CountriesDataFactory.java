@@ -12,19 +12,19 @@ import com.example.sma.data.fetchdata.ICountriesDataProvider;
 
 public class CountriesDataFactory {
 
-    private final ICache realmCache;
+    private final ICache factoryRealmCache;
     private final IApplicationApi api;
 
     public CountriesDataFactory(ICache realmCache, IApplicationApi api) {
-        this.realmCache = realmCache;
+        this.factoryRealmCache = realmCache;
         this.api = api;
     }
 
     public ICountriesDataProvider getDataProvider() {
-        if (realmCache.isCached()) {
-            return new FetchCountriesDataFromCacheImpl(realmCache);
-        }
-        return new FetchCountriesDataFromNetworkImpl(realmCache, api);
+        if (factoryRealmCache.isCached()) {
+            return new FetchCountriesDataFromCacheImpl(factoryRealmCache);
+        } else
+            return new FetchCountriesDataFromNetworkImpl(factoryRealmCache, api);
     }
 
 }

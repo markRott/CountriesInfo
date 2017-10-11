@@ -7,7 +7,6 @@ import com.example.usecases.CountriesUseCase;
 import com.test.countriesapp.countries.CountriesFragment;
 import com.test.countriesapp.countries.adapter.CountriesAdapter;
 import com.test.countriesapp.dagger2.app.MyAppComponent;
-import com.test.countriesapp.dagger2.countries.modules.CacheModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesAdapterModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesUseCaseModule;
 import com.test.countriesapp.dagger2.countries.modules.CountryRepositoryModule;
@@ -23,7 +22,7 @@ import ru.terrakok.cicerone.Router;
 @Component(dependencies = MyAppComponent.class,
         modules = {
                 CountriesAdapterModule.class,
-                CacheModule.class,
+//                CacheModule.class,
                 CountryRepositoryModule.class,
                 CountriesUseCaseModule.class
         })

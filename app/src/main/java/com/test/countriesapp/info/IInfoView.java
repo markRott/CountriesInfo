@@ -8,6 +8,6 @@ import com.arellomobile.mvp.MvpView;
 
 public interface IInfoView extends MvpView {
 
-    void clearDatabase();
+    void showClearDatabaseMessage(boolean deleteState);
 
 }

@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 
 import com.example.interfaces.IPostExecutionThread;
 import com.example.sma.data.IApplicationApi;
+import com.example.sma.data.cache.ICache;
 import com.test.countriesapp.MainActivity;
+import com.test.countriesapp.dagger2.countries.modules.CacheModule;
 import com.test.countriesapp.utils.image.IImageLoader;
 
 import javax.inject.Singleton;
@@ -25,7 +27,8 @@ import ru.terrakok.cicerone.Router;
         ApiModule.class,
         MainThreadModule.class,
         UtilsModule.class,
-        NavigationModule.class
+        NavigationModule.class,
+        CacheModule.class,
 })
 public interface MyAppComponent {
 
@@ -46,4 +49,6 @@ public interface MyAppComponent {
     Router router();
 
     NavigatorHolder navigatorHolder();
+
+    ICache realmCache();
 }
