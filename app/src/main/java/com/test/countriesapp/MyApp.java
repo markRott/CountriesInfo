@@ -25,7 +25,7 @@ public class MyApp extends Application {
         super.onCreate();
         Logger.addLogAdapter(new AndroidLogAdapter());
         initRealm();
-        initLeak();
+//        initLeak();
         initAppComponent();
     }
 
@@ -54,7 +54,5 @@ public class MyApp extends Application {
 
     public void initRealm() {
         Realm.init(this);
-//        RealmConfiguration config = new RealmConfiguration.Builder().name("dogapp.realm").build();
-//        Realm.setDefaultConfiguration(config);
     }
 }

@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity {
 
                 @Override
                 protected void showSystemMessage(String message) {
-//                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -79,7 +78,6 @@ public class MainActivity extends BaseActivity {
                 @Override
                 public void applyCommand(Command command) {
                     super.applyCommand(command);
-//                    updateScreenNames(command);
                 }
             };
 }
