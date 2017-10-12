@@ -1,5 +1,7 @@
 package com.test.countriesapp.detailcountry;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,14 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
 import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseFragment;
-import com.test.countriesapp.utils.image.IImageLoader;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by sma on 12.10.17.
  */
 
-public class DetailCountryFragment extends BaseFragment {
+public class DetailCountryFragment extends BaseFragment implements IDetailCountryView {
 
     @BindView(R.id.iv_country_flag)
     ImageView ivCountryFlag;
@@ -41,8 +41,8 @@ public class DetailCountryFragment extends BaseFragment {
     @BindView(R.id.tv_country_numeric_code)
     TextView tvCountryNumericCode;
 
-    @Inject
-    IImageLoader imageLoader;
+    @InjectPresenter
+    DetailCountryPresenter detailCountryPresenter;
 
     private CountryDomainModel model;
 
@@ -56,7 +56,6 @@ public class DetailCountryFragment extends BaseFragment {
 
     @Override
     public void inject() {
-        getMyApp().getAppComponent().inject(this);
     }
 
     @Override
@@ -82,8 +81,8 @@ public class DetailCountryFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         fillViews();
+        loadCountryFlag(savedInstanceState);
     }
 
     @Override
@@ -106,8 +105,13 @@ public class DetailCountryFragment extends BaseFragment {
         super.onPause();
     }
 
+    @Override
+    public void renderCountryFlag(byte[] bitmapBytes) {
+        Bitmap bmp = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+        ivCountryFlag.setImageBitmap(bmp);
+    }
+
     private void fillViews() {
-        imageLoader.loadImage(model.getFlag(), ivCountryFlag, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
         tvCountryName.setText(String.format(getString(R.string.country_name), model.getCountryName()));
         tvCapital.setText(String.format(getString(R.string.capital), model.getCapital()));
         tvCountryRegion.setText(String.format(getString(R.string.country_region), model.getRegion()));
@@ -116,4 +120,8 @@ public class DetailCountryFragment extends BaseFragment {
         tvCountryNumericCode.setText(String.format(getString(R.string.numeric_code), model.getNumericCode()));
     }
 
+    private void loadCountryFlag(Bundle savedInstanceState) {
+        if (savedInstanceState != null) return;
+        detailCountryPresenter.loadCountryFlagInSvgFormat(model.getFlag());
+    }
 }

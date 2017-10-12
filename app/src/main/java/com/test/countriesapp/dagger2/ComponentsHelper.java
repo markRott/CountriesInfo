@@ -21,9 +21,6 @@ import com.test.countriesapp.dagger2.countries.modules.CountryRepositoryModule;
 
 public class ComponentsHelper {
 
-//    private static MyAppComponent myAppComponent;
-//    private static CountriesComponent countriesComponent;
-
     private ComponentsHelper() {
     }
 

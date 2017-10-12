@@ -1,4 +1,4 @@
-package com.test.countriesapp.utils.image;
+package com.test.countriesapp.utils.image.picasso;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.test.countriesapp.utils.image.IImageLoader;
 
 /**
  * Created by sma on 10.10.17.
