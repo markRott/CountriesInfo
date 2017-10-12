@@ -11,7 +11,7 @@ public class CountryEntityForRealm extends RealmObject {
 
     @PrimaryKey
     private String name;
-    private double area;
+    private float area;
     private double gini;
     private String flag;
     private String cioc;
@@ -29,7 +29,7 @@ public class CountryEntityForRealm extends RealmObject {
         this.name = name;
     }
 
-    public void setArea(double area) {
+    public void setArea(float area) {
         this.area = area;
     }
 
@@ -85,7 +85,7 @@ public class CountryEntityForRealm extends RealmObject {
         return name;
     }
 
-    public double getArea() {
+    public float getArea() {
         return area;
     }
 

@@ -1,12 +1,14 @@
 package com.example.models;
 
+import java.io.Serializable;
+
 /**
  * Created by sma on 10.10.17.
  */
 
-public class CountryDomainModel {
+public class CountryDomainModel implements Serializable{
 
-    private double area;
+    private float area;
     private String flag;
     private String region;
     private int population;
@@ -14,7 +16,7 @@ public class CountryDomainModel {
     private String countryName;
     private String numericCode;
 
-    public void setArea(double area) {
+    public void setArea(float area) {
         this.area = area;
     }
 
@@ -42,7 +44,7 @@ public class CountryDomainModel {
         this.numericCode = numericCode;
     }
 
-    public double getArea() {
+    public float getArea() {
         return area;
     }
 

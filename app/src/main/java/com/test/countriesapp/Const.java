@@ -5,10 +5,22 @@ package com.test.countriesapp;
  */
 
 public final class Const {
+    private Const() {
+    }
 
     public static final class ScreenKey {
+        private ScreenKey() {
+        }
 
         public static final String COUNTRIES = "COUNTRIES";
         public static final String DETAIL_COUNTRY = "DETAIL_COUNTRY";
+    }
+
+    public static final class ArgsKey {
+        private ArgsKey() {
+        }
+
+        public static final String COUNTRY_DETAIL = "COUNTRY_DETAIL";
+
     }
 }

@@ -118,7 +118,7 @@ public class CountriesFragment extends BaseFragment
 
     @Override
     public void onTouch(int position, CountryDomainModel data) {
-//        usersPresenter.onOpenDetailScreen(data.getUserId());
+        countriesPresenter.openDetailScreen(data);
     }
 
     private void setupRecyclerView() {

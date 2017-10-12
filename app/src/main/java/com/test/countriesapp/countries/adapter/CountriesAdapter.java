@@ -33,5 +33,6 @@ public class CountriesAdapter extends BaseRecyclerAdapter<CountryDomainModel, Co
     private void fillData(CountryItemAdapterHolder holder, int position) {
         final CountryDomainModel model = getItemByPosition(position);
         holder.tvCountryName.setText(model.getCountryName());
+        setupItemTouchListener(holder.rootView, position, model);
     }
 }
