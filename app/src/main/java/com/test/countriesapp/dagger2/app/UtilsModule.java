@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 
 import com.test.countriesapp.utils.image.IImageLoader;
-import com.test.countriesapp.utils.image.PicassoImageLoaderImpl;
+import com.test.countriesapp.utils.image.picasso.PicassoImageLoaderImpl;
 
 import javax.inject.Singleton;
 

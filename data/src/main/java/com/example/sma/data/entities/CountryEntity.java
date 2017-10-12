@@ -25,7 +25,7 @@ public class CountryEntity {
     @SerializedName("demonym")
     private String demonym;
     @SerializedName("area")
-    private double area;
+    private float area;
     @SerializedName("gini")
     private double gini;
     @SerializedName("nativeName")
@@ -69,7 +69,7 @@ public class CountryEntity {
         this.demonym = demonym;
     }
 
-    public void setArea(double area) {
+    public void setArea(float area) {
         this.area = area;
     }
 
@@ -125,7 +125,7 @@ public class CountryEntity {
         return demonym;
     }
 
-    public Double getArea() {
+    public float getArea() {
         return area;
     }
 
