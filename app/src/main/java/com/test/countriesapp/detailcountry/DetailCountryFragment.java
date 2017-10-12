@@ -16,6 +16,9 @@ import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseFragment;
+import com.test.countriesapp.cache.LruCacheForCountryFlagImpl;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +44,8 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     @BindView(R.id.tv_country_numeric_code)
     TextView tvCountryNumericCode;
 
+    @Inject
+    LruCacheForCountryFlagImpl lruCacheCountryFlag;
     @InjectPresenter
     DetailCountryPresenter detailCountryPresenter;
 
@@ -56,6 +61,7 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
 
     @Override
     public void inject() {
+        getMyApp().getAppComponent().inject(this);
     }
 
     @Override
@@ -81,7 +87,9 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         fillViews();
+        setCache(savedInstanceState);
         loadCountryFlag(savedInstanceState);
     }
 
@@ -109,6 +117,11 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     public void renderCountryFlag(byte[] bitmapBytes) {
         Bitmap bmp = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
         ivCountryFlag.setImageBitmap(bmp);
+    }
+
+    private void setCache(Bundle savedInstanceState) {
+        if (savedInstanceState != null) return;
+        detailCountryPresenter.setCacheForCountryFlag(lruCacheCountryFlag);
     }
 
     private void fillViews() {

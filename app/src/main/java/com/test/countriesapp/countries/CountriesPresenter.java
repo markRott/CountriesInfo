@@ -20,7 +20,7 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
 
     Router router;
     CountriesUseCase countriesUseCase;
-
+    
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();

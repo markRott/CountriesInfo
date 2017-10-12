@@ -9,6 +9,8 @@ import com.arellomobile.mvp.InjectViewState;
 import com.caverock.androidsvg.SVG;
 import com.orhanobut.logger.Logger;
 import com.test.countriesapp.base.BasePresenter;
+import com.test.countriesapp.cache.LruCacheForCountryFlagImpl;
+import com.test.countriesapp.utils.CollectionsUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,6 +27,7 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     private byte[] bitmapBytes;
     private HttpImageRequestTask requestTask;
+    private LruCacheForCountryFlagImpl cache;
 
     @Override
     protected void onFirstViewAttach() {
@@ -33,8 +36,17 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     public void loadCountryFlagInSvgFormat(String url) {
         if (TextUtils.isEmpty(url)) return;
-        requestTask = new HttpImageRequestTask(url);
-        requestTask.execute();
+        if (!CollectionsUtil.isNullOrEmpty(cache) && cache.containsKey(url)) {
+            bitmapBytes = cache.get(url);
+            getViewState().renderCountryFlag(bitmapBytes);
+        } else {
+            requestTask = new HttpImageRequestTask(url);
+            requestTask.execute();
+        }
+    }
+
+    public void setCacheForCountryFlag(LruCacheForCountryFlagImpl cacheForCountryFlag) {
+        this.cache = cacheForCountryFlag;
     }
 
     private class HttpImageRequestTask extends AsyncTask<Void, Void, byte[]> {
@@ -51,6 +63,7 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
                 final SVG svg = getSvgFromNetwork();
                 final Bitmap bitmap = convertSvgToBitmap(svg);
                 bitmapBytes = convertBitmapToByteArray(bitmap);
+                cache.put(flagUrl, bitmapBytes);
                 Logger.i("loadCountryFlagInSvgFormat doInBackground finish");
             } catch (Exception e) {
                 Logger.e("loadCountryFlagInSvgFormat doInBackground fail = " + e.getMessage());

@@ -4,6 +4,7 @@ import com.test.countriesapp.MyApp;
 import com.test.countriesapp.dagger2.app.ApiModule;
 import com.test.countriesapp.dagger2.app.ContextModule;
 import com.test.countriesapp.dagger2.app.DaggerMyAppComponent;
+import com.test.countriesapp.dagger2.app.LruCacheForCountryFlagsModule;
 import com.test.countriesapp.dagger2.app.MainThreadModule;
 import com.test.countriesapp.dagger2.app.MyAppComponent;
 import com.test.countriesapp.dagger2.app.NavigationModule;
@@ -33,6 +34,7 @@ public class ComponentsHelper {
                 .utilsModule(new UtilsModule())
                 .navigationModule(new NavigationModule())
                 .cacheModule(new CacheModule())
+                .lruCacheForCountryFlagsModule(new LruCacheForCountryFlagsModule())
                 .build();
         return myAppComponent;
     }

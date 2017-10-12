@@ -8,7 +8,9 @@ import com.example.interfaces.IPostExecutionThread;
 import com.example.sma.data.IApplicationApi;
 import com.example.sma.data.cache.ICache;
 import com.test.countriesapp.MainActivity;
+import com.test.countriesapp.cache.LruCacheForCountryFlagImpl;
 import com.test.countriesapp.dagger2.countries.modules.CacheModule;
+import com.test.countriesapp.detailcountry.DetailCountryFragment;
 import com.test.countriesapp.utils.image.IImageLoader;
 
 import javax.inject.Singleton;
@@ -29,12 +31,13 @@ import ru.terrakok.cicerone.Router;
         UtilsModule.class,
         NavigationModule.class,
         CacheModule.class,
+        LruCacheForCountryFlagsModule.class
 })
 public interface MyAppComponent {
 
     void inject(MainActivity mainActivity);
 
-//    void inject(DetailCountryFragment detailCountryFragment);
+    void inject(DetailCountryFragment detailCountryFragment);
 
     Context context();
 
@@ -53,4 +56,6 @@ public interface MyAppComponent {
     NavigatorHolder navigatorHolder();
 
     ICache realmCache();
+
+    LruCacheForCountryFlagImpl lruCacheCountryFlag();
 }
