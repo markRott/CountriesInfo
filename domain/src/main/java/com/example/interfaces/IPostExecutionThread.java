@@ -8,7 +8,5 @@ import io.reactivex.Scheduler;
 
 public interface IPostExecutionThread {
 
-
     Scheduler getScheduler();
-
 }
