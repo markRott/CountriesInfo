@@ -24,6 +24,7 @@ public class CountryEntityToDomainModel {
             model.setCapital(entity.getCapital());
             model.setCountryName(entity.getName());
             model.setNumericCode(entity.getNumericCode());
+            model.setAlpha3Code(entity.getAlpha3Code());
         }
         return model;
     }

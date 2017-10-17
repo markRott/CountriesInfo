@@ -13,9 +13,10 @@ import retrofit2.http.GET;
 
 public interface IApplicationApi {
 
-    String BASE_URL = "https://restcountries.eu/rest/v2/";
+    String SVG = ".svg";
+    String BASE_URL = "https://restcountries.eu/";
+    String BASE_URL_FOR_FLAG_IMAGE = "https://restcountries.eu/data/";
 
-    @GET(BASE_URL + "all")
+    @GET(BASE_URL + "rest/v2/all")
     Flowable<List<CountryEntity>> fetchAllCountries();
-
 }

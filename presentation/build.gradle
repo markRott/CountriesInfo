@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+
+        applicationId "com.test.countriesapp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':domain')
+    compile project(':data')
+    compile files('libs/glide-4.2.0.jar')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    testCompile 'junit:junit:4.12'
+    compile "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit2}"
+    compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.converterGson}"
+    compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${rootProject.ext.rxJavaAdapter}"
+    compile "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJava}"
+    compile "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroid}"
+    compile "com.google.dagger:dagger:${rootProject.ext.dagger2}"
+    compile "com.jakewharton:butterknife:${rootProject.ext.butterknife}"
+    compile "com.jakewharton:butterknife-compiler:${rootProject.ext.butterknife}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.ext.daggerCompiler}"
+    compile "com.arello-mobile:moxy:${rootProject.ext.moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${rootProject.ext.moxyCompiler}"
+    compile "com.arello-mobile:moxy-app-compat:${rootProject.ext.moxyAppCompat}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+    compile "com.squareup.picasso:picasso:${rootProject.ext.picasso}"
+    compile "ru.terrakok.cicerone:cicerone:${rootProject.ext.cicerone}"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.debugCompileLeakcanary}"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.releaseCompileLeakcanary}"
+    compile "com.orhanobut:logger:${rootProject.ext.logger}"
+    compile files('libs/androidsvg-1.2.1.jar')
+}

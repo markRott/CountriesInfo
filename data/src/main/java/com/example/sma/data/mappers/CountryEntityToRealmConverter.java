@@ -1,6 +1,6 @@
 package com.example.sma.data.mappers;
 
-import com.example.sma.data.cache.CountryEntityForRealm;
+import com.example.sma.data.cache.realm.CountryEntityForRealm;
 import com.example.sma.data.entities.CountryEntity;
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ public class CountryEntityToRealmConverter {
             model.setCapital(entity.getCapital());
             model.setName(entity.getName());
             model.setNumericCode(entity.getNumericCode());
+            model.setAlpha3Code(entity.getAlpha3Code());
         }
         return model;
     }
