@@ -1,6 +1,6 @@
 package com.example.sma.data.mappers;
 
-import com.example.sma.data.cache.CountryEntityForRealm;
+import com.example.sma.data.cache.realm.CountryEntityForRealm;
 import com.example.sma.data.entities.CountryEntity;
 
 import java.util.ArrayList;

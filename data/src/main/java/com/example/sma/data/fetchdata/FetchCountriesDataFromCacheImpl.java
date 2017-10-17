@@ -1,6 +1,6 @@
 package com.example.sma.data.fetchdata;
 
-import com.example.sma.data.cache.ICache;
+import com.example.sma.data.cache.realm.ICache;
 import com.example.sma.data.entities.CountryEntity;
 
 import java.util.List;

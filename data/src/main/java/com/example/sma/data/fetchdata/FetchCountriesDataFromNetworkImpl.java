@@ -1,8 +1,8 @@
 package com.example.sma.data.fetchdata;
 
 import com.example.sma.data.IApplicationApi;
-import com.example.sma.data.cache.CountryEntityForRealm;
-import com.example.sma.data.cache.ICache;
+import com.example.sma.data.cache.realm.CountryEntityForRealm;
+import com.example.sma.data.cache.realm.ICache;
 import com.example.sma.data.entities.CountryEntity;
 import com.example.sma.data.mappers.CountryEntityToRealmConverter;
 
@@ -17,8 +17,8 @@ import io.reactivex.functions.Consumer;
 
 public class FetchCountriesDataFromNetworkImpl implements ICountriesDataProvider {
 
-    private final ICache providerRealmCache;
     private final IApplicationApi api;
+    private final ICache providerRealmCache;
 
     public FetchCountriesDataFromNetworkImpl(ICache realmCache, IApplicationApi api) {
         this.api = api;
