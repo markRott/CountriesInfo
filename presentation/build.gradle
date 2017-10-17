@@ -67,5 +67,4 @@ dependencies {
     debugCompile "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.debugCompileLeakcanary}"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.releaseCompileLeakcanary}"
     compile "com.orhanobut:logger:${rootProject.ext.logger}"
-    compile files('libs/androidsvg-1.2.1.jar')
 }
