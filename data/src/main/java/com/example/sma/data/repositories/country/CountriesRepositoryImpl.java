@@ -1,9 +1,9 @@
-package com.example.sma.data.repositories;
+package com.example.sma.data.repositories.country;
 
 import com.example.interfaces.ICountryRepository;
 import com.example.models.CountryDomainModel;
 import com.example.sma.data.entities.CountryEntity;
-import com.example.sma.data.fetchdata.ICountriesDataProvider;
+import com.example.sma.data.fetchdata.country.ICountriesDataProvider;
 import com.example.sma.data.mappers.CountryEntityToDomainModel;
 
 import java.util.List;
@@ -18,8 +18,8 @@ import io.reactivex.functions.Function;
 
 public class CountriesRepositoryImpl implements ICountryRepository {
 
-    private CountryEntityToDomainModel converter;
     private CountriesDataFactory dataFactory;
+    private CountryEntityToDomainModel converter;
 
     public CountriesRepositoryImpl(
             CountryEntityToDomainModel mapper,

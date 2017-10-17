@@ -4,8 +4,8 @@ import com.example.interfaces.ICountryRepository;
 import com.example.sma.data.IApplicationApi;
 import com.example.sma.data.cache.realm.ICache;
 import com.example.sma.data.mappers.CountryEntityToDomainModel;
-import com.example.sma.data.repositories.CountriesDataFactory;
-import com.example.sma.data.repositories.CountriesRepositoryImpl;
+import com.example.sma.data.repositories.country.CountriesDataFactory;
+import com.example.sma.data.repositories.country.CountriesRepositoryImpl;
 import com.test.countriesapp.dagger2.countries.CountriesScope;
 
 import dagger.Module;

@@ -12,7 +12,6 @@ public abstract class BasePresenter<View extends MvpView> extends MvpPresenter<V
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
         inject();
     }
 

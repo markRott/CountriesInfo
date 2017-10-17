@@ -1,10 +1,10 @@
-package com.example.sma.data.repositories;
+package com.example.sma.data.repositories.country;
 
 import com.example.sma.data.IApplicationApi;
 import com.example.sma.data.cache.realm.ICache;
-import com.example.sma.data.fetchdata.FetchCountriesDataFromCacheImpl;
-import com.example.sma.data.fetchdata.FetchCountriesDataFromNetworkImpl;
-import com.example.sma.data.fetchdata.ICountriesDataProvider;
+import com.example.sma.data.fetchdata.country.FetchCountriesDataFromCacheImpl;
+import com.example.sma.data.fetchdata.country.FetchCountriesDataFromNetworkImpl;
+import com.example.sma.data.fetchdata.country.ICountriesDataProvider;
 
 /**
  * Created by sma on 11.10.17.

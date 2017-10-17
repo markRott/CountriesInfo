@@ -1,4 +1,4 @@
-package com.example.sma.data.fetchdata;
+package com.example.sma.data.fetchdata.country;
 
 import com.example.sma.data.entities.CountryEntity;
 

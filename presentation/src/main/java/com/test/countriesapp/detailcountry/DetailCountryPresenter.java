@@ -1,32 +1,15 @@
 package com.test.countriesapp.detailcountry;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.text.TextUtils;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.caverock.androidsvg.SVG;
-import com.example.interfaces.IPostExecutionThread;
-import com.example.sma.data.cache.lru.LruCacheForCountryFlagImpl;
+import com.example.usecases.CountryFlagUseCase;
 import com.orhanobut.logger.Logger;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
 import com.test.countriesapp.base.BaseSubscriber;
-import com.test.countriesapp.utils.CollectionsUtil;
-
-import org.reactivestreams.Publisher;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
-
-import io.reactivex.Flowable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by sma on 12.10.17.
@@ -36,12 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     @Inject
-    LruCacheForCountryFlagImpl cache;
-    @Inject
-    IPostExecutionThread mainThread;
-
-    private String flagUrl;
-    private byte[] bitmapBytes;
+    CountryFlagUseCase countryFlagUseCase;
 
     @Override
     protected void onFirstViewAttach() {
@@ -75,84 +53,24 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     @Override
     public void inject() {
-        MyApp.getAppComponent().inject(this);
-        System.out.println("cache = " + cache);
-        System.out.println("mainThread = " + mainThread);
+        MyApp.getDetailCountryComponent().inject(this);
     }
 
-    void loadCountryFlagInSvgFormat(String url) {
-        if (TextUtils.isEmpty(url)) return;
-        this.flagUrl = url;
-        if (!CollectionsUtil.isNullOrEmpty(cache) && cache.containsKey(url)) {
-            bitmapBytes = cache.get(url);
-            getViewState().renderCountryFlag(bitmapBytes);
-        } else {
-            asyncLoadFlag()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(mainThread.getScheduler())
-                    .subscribe(new LoadFlagSubscriber())
-            ;
-        }
-    }
-
-    private Flowable<byte[]> asyncLoadFlag() {
-        return Flowable.defer(new Callable<Publisher<? extends byte[]>>() {
-            @Override
-            public Publisher<? extends byte[]> call() throws Exception {
-                return Flowable.just(syncLoadFlag());
-            }
-        });
-    }
-
-    private byte[] syncLoadFlag() throws Exception {
-        final SVG svg = getSvgFromNetwork();
-        final Bitmap bitmap = convertSvgToBitmap(svg);
-        bitmapBytes = convertBitmapToByteArray(bitmap);
-        cache.put(flagUrl, bitmapBytes);
-        Logger.i("loadCountryFlagInSvgFormat finish");
-        return bitmapBytes;
+    void loadCountryFlagInSvgFormat(String alpha3Code) {
+        if (TextUtils.isEmpty(alpha3Code)) return;
+        countryFlagUseCase.execute(new LoadFlagSubscriber(), null);
     }
 
     private class LoadFlagSubscriber extends BaseSubscriber<byte[]> {
         @Override
         public void onNext(byte[] o) {
-            bitmapBytes = o;
-            getViewState().renderCountryFlag(bitmapBytes);
+            if (o == null) return;
+            getViewState().renderCountryFlag(o);
         }
 
         @Override
         public void onError(Throwable t) {
             Logger.e("LoadFlagSubscriber = " + t.getMessage());
         }
-    }
-
-    private SVG getSvgFromNetwork() throws Exception {
-        final URL url = new URL(flagUrl);
-        final HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        final InputStream inputStream = urlConnection.getInputStream();
-        final SVG svg = SVG.getFromInputStream(inputStream);
-        return svg;
-    }
-
-    private Bitmap convertSvgToBitmap(SVG svg) throws IOException {
-        Bitmap bitmap = null;
-        if (svg.getDocumentWidth() != -1) {
-            bitmap = Bitmap.createBitmap((int) Math.ceil(svg.getDocumentWidth()),
-                    (int) Math.ceil(svg.getDocumentHeight()),
-                    Bitmap.Config.ARGB_8888);
-            final Canvas bmcanvas = new Canvas(bitmap);
-            bmcanvas.drawRGB(255, 255, 255);
-            svg.renderToCanvas(bmcanvas);
-        }
-        return bitmap;
-    }
-
-    private byte[] convertBitmapToByteArray(final Bitmap bitmap) throws IOException {
-        byte[] bytes = null;
-        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        bytes = stream.toByteArray();
-        stream.close();
-        return bytes;
     }
 }

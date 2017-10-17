@@ -10,7 +10,6 @@ import com.example.sma.data.cache.lru.LruCacheForCountryFlagImpl;
 import com.example.sma.data.cache.realm.ICache;
 import com.test.countriesapp.MainActivity;
 import com.test.countriesapp.dagger2.countries.modules.CacheModule;
-import com.test.countriesapp.detailcountry.DetailCountryPresenter;
 import com.test.countriesapp.utils.image.IImageLoader;
 
 import javax.inject.Singleton;
@@ -39,7 +38,7 @@ public interface MyAppComponent {
 
 //    void inject(DetailCountryFragment detailCountryFragment);
 
-    void inject(DetailCountryPresenter presenter);
+//    void inject(DetailCountryPresenter presenter);
 
     Context context();
 

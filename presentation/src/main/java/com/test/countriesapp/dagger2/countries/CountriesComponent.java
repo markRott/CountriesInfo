@@ -2,7 +2,7 @@ package com.test.countriesapp.dagger2.countries;
 
 import com.example.interfaces.ICountryRepository;
 import com.example.sma.data.cache.realm.ICache;
-import com.example.sma.data.repositories.CountriesDataFactory;
+import com.example.sma.data.repositories.country.CountriesDataFactory;
 import com.example.usecases.CountriesUseCase;
 import com.test.countriesapp.countries.CountriesFragment;
 import com.test.countriesapp.countries.CountriesPresenter;
@@ -23,7 +23,6 @@ import ru.terrakok.cicerone.Router;
 @Component(dependencies = MyAppComponent.class,
         modules = {
                 CountriesAdapterModule.class,
-//                CacheModule.class,
                 CountryRepositoryModule.class,
                 CountriesUseCaseModule.class
         })

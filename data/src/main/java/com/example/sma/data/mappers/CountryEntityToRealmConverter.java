@@ -24,6 +24,7 @@ public class CountryEntityToRealmConverter {
             model.setCapital(entity.getCapital());
             model.setName(entity.getName());
             model.setNumericCode(entity.getNumericCode());
+            model.setAlpha3Code(entity.getAlpha3Code());
         }
         return model;
     }

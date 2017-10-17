@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by sma on 10.10.17.
  */
 
-public class CountryDomainModel implements Serializable{
+public class CountryDomainModel implements Serializable {
 
     private float area;
     private String flag;
@@ -15,6 +15,7 @@ public class CountryDomainModel implements Serializable{
     private String capital;
     private String countryName;
     private String numericCode;
+    private String alpha3Code;
 
     public void setArea(float area) {
         this.area = area;
@@ -42,6 +43,10 @@ public class CountryDomainModel implements Serializable{
 
     public void setNumericCode(String numericCode) {
         this.numericCode = numericCode;
+    }
+
+    public void setAlpha3Code(String alpha3Code) {
+        this.alpha3Code = alpha3Code;
     }
 
     public float getArea() {
@@ -72,6 +77,10 @@ public class CountryDomainModel implements Serializable{
         return numericCode;
     }
 
+    public String getAlpha3Code() {
+        return alpha3Code;
+    }
+
     @Override
     public String toString() {
         return "CountryDomainModel{" +
@@ -82,6 +91,7 @@ public class CountryDomainModel implements Serializable{
                 ", capital='" + capital + '\'' +
                 ", countryName='" + countryName + '\'' +
                 ", numericCode='" + numericCode + '\'' +
+                ", alpha3Code='" + alpha3Code + '\'' +
                 '}';
     }
 }

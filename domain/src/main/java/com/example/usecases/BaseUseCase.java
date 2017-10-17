@@ -17,13 +17,16 @@ public abstract class BaseUseCase<T, Params> {
     private CompositeDisposable disposables;
     private IPostExecutionThread postExecutionThread;
 
-    public abstract Flowable<T> buildUseCaseObservable(Params params);
+    abstract Flowable<T> buildUseCaseObservable(Params params);
 
     public BaseUseCase(IPostExecutionThread thread) {
         this.postExecutionThread = thread;
         disposables = new CompositeDisposable();
     }
 
+    /**
+     * Need call
+     */
     public void execute(final DisposableSubscriber<T> disposableSubscriber, final Params params) {
         final Flowable<T> responseFlowable = getResponseFlowable(params);
         addDisposable(responseFlowable.subscribeWith(disposableSubscriber));

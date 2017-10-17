@@ -15,6 +15,10 @@ import com.test.countriesapp.dagger2.countries.modules.CacheModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesAdapterModule;
 import com.test.countriesapp.dagger2.countries.modules.CountriesUseCaseModule;
 import com.test.countriesapp.dagger2.countries.modules.CountryRepositoryModule;
+import com.test.countriesapp.dagger2.detailcountry.DaggerDetailCountryComponent;
+import com.test.countriesapp.dagger2.detailcountry.DetailCountryComponent;
+import com.test.countriesapp.dagger2.detailcountry.FlagRepositoryModule;
+import com.test.countriesapp.dagger2.detailcountry.FlagUseCaseModule;
 
 /**
  * Created by sma on 10.10.17.
@@ -45,6 +49,18 @@ public class ComponentsHelper {
                 .countriesAdapterModule(new CountriesAdapterModule())
                 .countryRepositoryModule(new CountryRepositoryModule())
                 .countriesUseCaseModule(new CountriesUseCaseModule())
+                .build();
+    }
+
+    public static DetailCountryComponent initDetailCountryComponent(
+            MyAppComponent myAppComponent,
+            String flagUrl) {
+
+        return DaggerDetailCountryComponent
+                .builder()
+                .myAppComponent(myAppComponent)
+                .flagRepositoryModule(new FlagRepositoryModule(flagUrl))
+                .flagUseCaseModule(new FlagUseCaseModule())
                 .build();
     }
 }
