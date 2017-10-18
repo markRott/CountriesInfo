@@ -1,6 +1,6 @@
 package com.test.countriesapp.detailcountry;
 
-import android.text.TextUtils;
+import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.usecases.CountryFlagUseCase;
@@ -8,6 +8,7 @@ import com.orhanobut.logger.Logger;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
 import com.test.countriesapp.base.BaseSubscriber;
+import com.test.countriesapp.utils.StringUtils;
 
 import javax.inject.Inject;
 
@@ -28,49 +29,40 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
     }
 
     @Override
-    public void attachView(IDetailCountryView view) {
-        Logger.i("attachView");
-        super.attachView(view);
-    }
-
-    @Override
-    public void detachView(IDetailCountryView view) {
-        super.detachView(view);
-        Logger.i("detachView");
-    }
-
-    @Override
-    public void destroyView(IDetailCountryView view) {
-        super.destroyView(view);
-        Logger.i("destroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Logger.i("onDestroy");
-    }
-
-    @Override
     public void inject() {
         MyApp.getDetailCountryComponent().inject(this);
     }
 
     void loadCountryFlagInSvgFormat(String alpha3Code) {
-        if (TextUtils.isEmpty(alpha3Code)) return;
+        if (countryFlagUseCase == null) return;
+        if (StringUtils.isEmpty(alpha3Code)) return;
         countryFlagUseCase.execute(new LoadFlagSubscriber(), null);
+    }
+
+    void actionAfterSuccessResponse(byte[] bitmapByteArray) {
+        getViewState().renderCountryFlag(bitmapByteArray);
+    }
+
+    void actionAfterErrorResponse(final String message) {
+        getViewState().showLoadErrorMessage(message);
     }
 
     private class LoadFlagSubscriber extends BaseSubscriber<byte[]> {
         @Override
-        public void onNext(byte[] o) {
-            if (o == null) return;
-            getViewState().renderCountryFlag(o);
+        public void onNext(byte[] bitmapByteArray) {
+            if (bitmapByteArray == null) return;
+            actionAfterSuccessResponse(bitmapByteArray);
         }
 
         @Override
         public void onError(Throwable t) {
             Logger.e("LoadFlagSubscriber = " + t.getMessage());
+            actionAfterErrorResponse(t.getMessage());
         }
+    }
+
+    @VisibleForTesting
+    void setCountryFlagUseCase(CountryFlagUseCase countryFlagUseCase) {
+        this.countryFlagUseCase = countryFlagUseCase;
     }
 }

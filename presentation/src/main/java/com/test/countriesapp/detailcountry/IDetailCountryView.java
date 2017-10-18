@@ -14,4 +14,7 @@ public interface IDetailCountryView extends MvpView {
 
     @StateStrategyType(value = SingleStateStrategy.class)
     void renderCountryFlag(byte[] bytes);
+
+    @StateStrategyType(value = SingleStateStrategy.class)
+    void showLoadErrorMessage(final String errorMessage);
 }
