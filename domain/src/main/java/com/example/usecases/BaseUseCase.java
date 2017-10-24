@@ -29,7 +29,9 @@ public abstract class BaseUseCase<T, Params> {
      */
     public void execute(final DisposableSubscriber<T> disposableSubscriber, final Params params) {
         final Flowable<T> responseFlowable = getResponseFlowable(params);
-        addDisposable(responseFlowable.subscribeWith(disposableSubscriber));
+        addDisposable(
+                responseFlowable.subscribeWith(disposableSubscriber)
+        );
     }
 
     public void dispose() {
@@ -45,6 +47,7 @@ public abstract class BaseUseCase<T, Params> {
 
     private Flowable<T> getResponseFlowable(final Params params) {
         return buildUseCaseObservable(params)
+                .onBackpressureLatest()
                 .subscribeOn(Schedulers.io())
                 .observeOn(postExecutionThread.getScheduler());
     }

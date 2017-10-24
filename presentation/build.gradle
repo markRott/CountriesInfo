@@ -45,9 +45,14 @@ dependencies {
     compile project(':domain')
     compile project(':data')
     compile files('libs/glide-4.2.0.jar')
+
+    testCompile 'junit:junit:4.12'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+
     compile "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit2}"
     compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.converterGson}"
     compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${rootProject.ext.rxJavaAdapter}"
@@ -60,11 +65,11 @@ dependencies {
     compile "com.arello-mobile:moxy:${rootProject.ext.moxy}"
     annotationProcessor "com.arello-mobile:moxy-compiler:${rootProject.ext.moxyCompiler}"
     compile "com.arello-mobile:moxy-app-compat:${rootProject.ext.moxyAppCompat}"
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+
     compile "com.squareup.picasso:picasso:${rootProject.ext.picasso}"
     compile "ru.terrakok.cicerone:cicerone:${rootProject.ext.cicerone}"
     debugCompile "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.debugCompileLeakcanary}"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.releaseCompileLeakcanary}"
     compile "com.orhanobut:logger:${rootProject.ext.logger}"
+
 }

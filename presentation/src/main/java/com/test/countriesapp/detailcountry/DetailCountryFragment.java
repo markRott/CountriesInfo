@@ -18,6 +18,7 @@ import com.test.countriesapp.Const;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseFragment;
+import com.test.countriesapp.utils.ToastFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,6 +117,16 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     public void renderCountryFlag(byte[] bitmapBytes) {
         final Bitmap bmp = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
         ivCountryFlag.setImageBitmap(bmp);
+    }
+
+    @Override
+    public void showLoadErrorMessage(String errorMessage) {
+        ToastFactory.showToast(getContext(), errorMessage);
+    }
+
+    @Override
+    public void unauthorize() {
+        presenter.openLoginScreen();
     }
 
     private void fillViews() {

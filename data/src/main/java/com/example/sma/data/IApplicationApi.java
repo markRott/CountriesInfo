@@ -17,6 +17,7 @@ public interface IApplicationApi {
     String BASE_URL = "https://restcountries.eu/";
     String BASE_URL_FOR_FLAG_IMAGE = "https://restcountries.eu/data/";
 
+    //    @GET("http://www.mocky.io/v2/59ee79833300008339b5c917")
     @GET(BASE_URL + "rest/v2/all")
     Flowable<List<CountryEntity>> fetchAllCountries();
 }
