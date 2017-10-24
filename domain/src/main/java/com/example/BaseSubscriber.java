@@ -1,4 +1,4 @@
-package com.test.countriesapp.base;
+package com.example;
 
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -15,7 +15,6 @@ public class BaseSubscriber<T> extends DisposableSubscriber<T> {
 
     @Override
     public void onError(Throwable t) {
-
     }
 
     @Override

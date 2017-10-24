@@ -12,6 +12,7 @@ public final class Const {
         private ScreenKey() {
         }
 
+        public static final String LOGIN_SCREEN = "LOGIN_SCREEN";
         public static final String COUNTRIES = "COUNTRIES";
         public static final String DETAIL_COUNTRY = "DETAIL_COUNTRY";
     }

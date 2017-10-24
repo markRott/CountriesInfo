@@ -110,6 +110,11 @@ public class CountriesFragment extends BaseFragment
     }
 
     @Override
+    public void unauthorize() {
+        countriesPresenter.openLoginScreen();
+    }
+
+    @Override
     public void renderCountriesList(Collection<CountryDomainModel> countryList) {
         if (CollectionsUtil.isNullOrEmpty(countryList)) return;
         countriesAdapter.setData(new ArrayList<>(countryList));

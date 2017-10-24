@@ -4,10 +4,9 @@ import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.usecases.CountryFlagUseCase;
-import com.orhanobut.logger.Logger;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
-import com.test.countriesapp.base.BaseSubscriber;
+import com.example.BaseSubscriber;
 import com.test.countriesapp.utils.StringUtils;
 
 import javax.inject.Inject;
@@ -39,6 +38,10 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
         countryFlagUseCase.execute(new LoadFlagSubscriber(), null);
     }
 
+    public void openLoginScreen() {
+
+    }
+
     void actionAfterSuccessResponse(byte[] bitmapByteArray) {
         getViewState().renderCountryFlag(bitmapByteArray);
     }
@@ -56,8 +59,10 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
         @Override
         public void onError(Throwable t) {
-            Logger.e("LoadFlagSubscriber = " + t.getMessage());
             actionAfterErrorResponse(t.getMessage());
+            if (isUnauthorizeException(t)) {
+                getViewState().unauthorize();
+            }
         }
     }
 

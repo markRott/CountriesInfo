@@ -8,7 +8,7 @@ import com.example.usecases.CountriesUseCase;
 import com.test.countriesapp.Const;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
-import com.test.countriesapp.base.BaseSubscriber;
+import com.example.BaseSubscriber;
 
 import java.util.List;
 
@@ -49,6 +49,10 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
         countriesUseCase.execute(new CountriesObserver(), null);
     }
 
+    public void openLoginScreen() {
+//        router.newRootScreen(Const.ScreenKey.LOGIN_SCREEN);
+    }
+
     void actionAfterSuccessResponse(final List<CountryDomainModel> countryDomainModels) {
         getViewState().hideProgressBar();
         getViewState().renderCountriesList(countryDomainModels);
@@ -57,6 +61,10 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
     void actionAfterErrorResponse(String message) {
         getViewState().hideProgressBar();
         getViewState().showErrorMessage(message);
+    }
+
+    void actionAfterUnautorizeExeption() {
+        getViewState().unauthorize();
     }
 
     private final class CountriesObserver extends BaseSubscriber<List<CountryDomainModel>> {
@@ -68,7 +76,11 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
 
         @Override
         public void onError(Throwable t) {
+            super.onError(t);
             actionAfterErrorResponse(t.getMessage());
+            if (isUnauthorizeException(t)) {
+                actionAfterUnautorizeExeption();
+            }
         }
     }
 

@@ -124,6 +124,11 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
         ToastFactory.showToast(getContext(), errorMessage);
     }
 
+    @Override
+    public void unauthorize() {
+        presenter.openLoginScreen();
+    }
+
     private void fillViews() {
         tvCountryName.setText(String.format(getString(R.string.country_name), model.getCountryName()));
         tvCapital.setText(String.format(getString(R.string.capital), model.getCapital()));

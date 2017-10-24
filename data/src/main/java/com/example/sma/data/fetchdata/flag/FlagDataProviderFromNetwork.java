@@ -60,8 +60,10 @@ public class FlagDataProviderFromNetwork implements IFlagDataProvider {
     }
 
     private SVG getSvgFromNetwork() throws Exception {
+//        flagUrl = "http://www.mocky.io/v2/59ee79833300008339b5c917";
         final URL url = new URL(flagUrl);
         final HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        System.out.println("urlConnection = " + urlConnection);
         final InputStream inputStream = urlConnection.getInputStream();
         final SVG svg = SVG.getFromInputStream(inputStream);
         return svg;
