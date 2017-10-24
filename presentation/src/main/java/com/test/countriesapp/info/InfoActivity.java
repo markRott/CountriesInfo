@@ -49,4 +49,9 @@ public class InfoActivity extends BaseActivity implements IInfoView {
             ToastFactory.showToast(this, getString(R.string.msg_cache_is_empty));
         }
     }
+
+    @Override
+    public void unauthorize() {
+
+    }
 }

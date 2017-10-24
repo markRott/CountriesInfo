@@ -28,7 +28,8 @@ public class InfoPresenter extends BasePresenter<IInfoView> {
 
     private void tryDeleteDataFromDatabase(Realm localRealm) {
         try {
-            final RealmResults<CountryEntityForRealm> result = localRealm.where(CountryEntityForRealm.class).findAll();
+            final RealmResults<CountryEntityForRealm> result =
+                    localRealm.where(CountryEntityForRealm.class).findAll();
             final boolean state = result.deleteAllFromRealm();
             Logger.d("deleteAllFromRealm = %s", state);
             getViewState().showClearDatabaseMessage(state);
