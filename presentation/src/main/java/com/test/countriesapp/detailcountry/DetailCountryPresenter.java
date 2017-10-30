@@ -60,9 +60,6 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
         @Override
         public void onError(Throwable t) {
             actionAfterErrorResponse(t.getMessage());
-            if (isUnauthorizeException(t)) {
-                getViewState().unauthorize();
-            }
         }
     }
 

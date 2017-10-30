@@ -49,7 +49,7 @@ public class ApiModule {
     }
 
     private OkHttpClient initOkHttpClient() {
-
-        return new OkHttpClient();
+        final OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        return builder.build();
     }
 }

@@ -78,9 +78,6 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
         public void onError(Throwable t) {
             super.onError(t);
             actionAfterErrorResponse(t.getMessage());
-            if (isUnauthorizeException(t)) {
-                actionAfterUnautorizeExeption();
-            }
         }
     }
 
