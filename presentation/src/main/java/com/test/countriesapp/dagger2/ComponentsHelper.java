@@ -1,5 +1,6 @@
 package com.test.countriesapp.dagger2;
 
+import com.example.models.CountryDomainModel;
 import com.test.countriesapp.MyApp;
 import com.test.countriesapp.dagger2.app.ApiModule;
 import com.test.countriesapp.dagger2.app.ContextModule;
@@ -26,11 +27,16 @@ import com.test.countriesapp.dagger2.detailcountry.FlagUseCaseModule;
 
 public class ComponentsHelper {
 
+    private static MyAppComponent appComponent;
+    private static CountriesComponent countriesComponent;
+    private static DetailCountryComponent detailCountryComponent;
+
     private ComponentsHelper() {
     }
 
     public static MyAppComponent initMyAppComponent(MyApp myApplication) {
-        return DaggerMyAppComponent
+        if (appComponent != null) return appComponent;
+        appComponent = DaggerMyAppComponent
                 .builder()
                 .contextModule(new ContextModule(myApplication))
                 .apiModule(new ApiModule())
@@ -40,27 +46,51 @@ public class ComponentsHelper {
                 .cacheModule(new CacheModule())
                 .lruCacheForCountryFlagsModule(new LruCacheForCountryFlagsModule())
                 .build();
+
+        return appComponent;
     }
 
-    public static CountriesComponent initCountriesComponent(MyAppComponent myAppComponent) {
-        return DaggerCountriesComponent
+    public static CountriesComponent initCountriesComponent() {
+        if (countriesComponent != null) return countriesComponent;
+        countriesComponent = DaggerCountriesComponent
                 .builder()
-                .myAppComponent(myAppComponent)
+                .myAppComponent(appComponent)
                 .countriesAdapterModule(new CountriesAdapterModule())
                 .countryRepositoryModule(new CountryRepositoryModule())
                 .countriesUseCaseModule(new CountriesUseCaseModule())
                 .build();
+        return countriesComponent;
     }
 
-    public static DetailCountryComponent initDetailCountryComponent(
-            MyAppComponent myAppComponent,
-            String flagUrl) {
-
-        return DaggerDetailCountryComponent
+    public static DetailCountryComponent initDetailCountryComponent(CountryDomainModel model) {
+        if (detailCountryComponent != null) return detailCountryComponent;
+        detailCountryComponent
+                = DaggerDetailCountryComponent
                 .builder()
-                .myAppComponent(myAppComponent)
-                .flagRepositoryModule(new FlagRepositoryModule(flagUrl))
+                .myAppComponent(appComponent)
+                .flagRepositoryModule(new FlagRepositoryModule(model))
                 .flagUseCaseModule(new FlagUseCaseModule())
                 .build();
+        return detailCountryComponent;
+    }
+
+    public static void clearCountriesComponent() {
+        if (countriesComponent != null) countriesComponent = null;
+    }
+
+    public static void clearDetailCountryComponent() {
+        if (detailCountryComponent != null) detailCountryComponent = null;
+    }
+
+    public static MyAppComponent getAppComponent() {
+        return appComponent;
+    }
+
+    public static CountriesComponent getCountriesComponent() {
+        return countriesComponent;
+    }
+
+    public static DetailCountryComponent getDetailCountryComponent() {
+        return detailCountryComponent;
     }
 }

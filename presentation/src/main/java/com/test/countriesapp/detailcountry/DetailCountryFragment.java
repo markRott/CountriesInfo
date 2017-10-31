@@ -12,12 +12,11 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
-import com.example.sma.data.IApplicationApi;
 import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
-import com.test.countriesapp.MyApp;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseFragment;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 import com.test.countriesapp.utils.ToastFactory;
 
 import butterknife.BindView;
@@ -47,8 +46,6 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     @InjectPresenter
     DetailCountryPresenter presenter;
 
-    private CountryDomainModel model;
-
     public static DetailCountryFragment newInstance(CountryDomainModel model) {
         final DetailCountryFragment frg = new DetailCountryFragment();
         final Bundle args = new Bundle();
@@ -59,13 +56,13 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
 
     @Override
     public void inject() {
-        MyApp.initDetailCountryComponent(prepareFlagUrl());
+        final CountryDomainModel model = getModelFromArgs(Const.ArgsKey.COUNTRY_DETAIL);
+        Logger.i(model.toString());
+        ComponentsHelper.initDetailCountryComponent(model);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        model = getModelFromArgs();
-        Logger.d(model);
         super.onCreate(savedInstanceState);
     }
 
@@ -84,8 +81,6 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        fillViews();
     }
 
     @Override
@@ -109,8 +104,8 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     }
 
     @Override
-    public void startLoadFlag() {
-        presenter.loadCountryFlagInSvgFormat(model.getAlpha3Code().toLowerCase());
+    public void startLoadFlag(String urlForLoad) {
+        presenter.loadCountryFlagInSvgFormat(urlForLoad);
     }
 
     @Override
@@ -125,11 +120,7 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
     }
 
     @Override
-    public void unauthorize() {
-        presenter.openLoginScreen();
-    }
-
-    private void fillViews() {
+    public void fillViews(final CountryDomainModel model) {
         tvCountryName.setText(String.format(getString(R.string.country_name), model.getCountryName()));
         tvCapital.setText(String.format(getString(R.string.capital), model.getCapital()));
         tvCountryRegion.setText(String.format(getString(R.string.country_region), model.getRegion()));
@@ -138,11 +129,8 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
         tvCountryNumericCode.setText(String.format(getString(R.string.numeric_code), model.getNumericCode()));
     }
 
-    private String prepareFlagUrl() {
-        return new StringBuilder()
-                .append(IApplicationApi.BASE_URL_FOR_FLAG_IMAGE)
-                .append(model.getAlpha3Code().toLowerCase())
-                .append(IApplicationApi.SVG)
-                .toString();
+    @Override
+    public void unauthorize() {
+        presenter.openLoginScreen();
     }
 }

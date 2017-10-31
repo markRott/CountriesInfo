@@ -3,7 +3,6 @@ package com.test.countriesapp.base;
 import android.os.Bundle;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.test.countriesapp.Const;
 
 /**
  * Created by sma on 10.10.17.
@@ -20,10 +19,10 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
         inject();
     }
 
-    public <T> T getModelFromArgs() {
+    public <T> T getModelFromArgs(final String key) {
         final Bundle bundle = getArguments();
         if (bundle == null) return null;
-        return (T) bundle.getSerializable(Const.ArgsKey.COUNTRY_DETAIL);
+        return (T) bundle.getSerializable(key);
     }
 
 }

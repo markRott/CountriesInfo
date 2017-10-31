@@ -3,12 +3,12 @@ package com.test.countriesapp.countries;
 import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.example.BaseSubscriber;
 import com.example.models.CountryDomainModel;
 import com.example.usecases.CountriesUseCase;
 import com.test.countriesapp.Const;
-import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
-import com.example.BaseSubscriber;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
 
     @Override
     public void inject() {
-        MyApp.getCountriesComponent().inject(this);
+        ComponentsHelper.getCountriesComponent().inject(this);
     }
 
     @Override
