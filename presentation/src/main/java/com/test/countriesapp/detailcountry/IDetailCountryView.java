@@ -12,8 +12,8 @@ import com.test.countriesapp.base.IMvpViewWithUnauthorized;
 
 public interface IDetailCountryView extends IMvpViewWithUnauthorized {
 
-    @StateStrategyType(value = OneExecutionStateStrategy.class)
-    void startLoadFlag(String url);
+//    @StateStrategyType(value = OneExecutionStateStrategy.class)
+//    void startLoadFlag(String url);
 
     @StateStrategyType(value = SingleStateStrategy.class)
     void renderCountryFlag(byte[] bytes);

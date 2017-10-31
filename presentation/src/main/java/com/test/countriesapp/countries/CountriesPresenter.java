@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.BaseSubscriber;
 import com.example.models.CountryDomainModel;
 import com.example.usecases.CountriesUseCase;
+import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
 import com.test.countriesapp.base.BasePresenter;
 import com.test.countriesapp.dagger2.ComponentsHelper;
@@ -37,6 +38,24 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         fetchCountries();
+    }
+
+    @Override
+    public void attachView(ICountriesView view) {
+        super.attachView(view);
+        Logger.e("CountriesPresenter attachView");
+    }
+
+    @Override
+    public void detachView(ICountriesView view) {
+        super.detachView(view);
+        Logger.e("CountriesPresenter detachView");
+    }
+
+    @Override
+    public void destroyView(ICountriesView view) {
+        super.destroyView(view);
+        Logger.e("CountriesPresenter destroyView");
     }
 
     public void openDetailScreen(CountryDomainModel data) {

@@ -50,8 +50,11 @@ public class CountriesFragment extends BaseFragment
     CountriesPresenter countriesPresenter;
 
     public static CountriesFragment newInstance() {
-
         return new CountriesFragment();
+    }
+
+    public CountriesFragment() {
+        setRetainInstance(true);
     }
 
     @Override
@@ -87,6 +90,16 @@ public class CountriesFragment extends BaseFragment
     public void onDestroyView() {
         super.onDestroyView();
         rcvCountries.setAdapter(null);
+    }
+
+    @Override
+    public void onDestroy() {
+        ComponentsHelper.clearCountriesComponent();
+        countriesAdapter.setItemTouchListener(null);
+        countriesAdapter = null;
+        pbCountries = null;
+        countriesPresenter = null;
+        super.onDestroy();
     }
 
     @Override

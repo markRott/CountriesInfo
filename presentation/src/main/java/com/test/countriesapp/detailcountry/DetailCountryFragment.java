@@ -54,6 +54,10 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
         return frg;
     }
 
+    public DetailCountryFragment() {
+        setRetainInstance(true);
+    }
+
     @Override
     public void inject() {
         final CountryDomainModel model = getModelFromArgs(Const.ArgsKey.COUNTRY_DETAIL);
@@ -95,17 +99,13 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
 
     @Override
     public void onDestroy() {
+        ComponentsHelper.clearDetailCountryComponent();
         super.onDestroy();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void startLoadFlag(String urlForLoad) {
-        presenter.loadCountryFlagInSvgFormat(urlForLoad);
     }
 
     @Override

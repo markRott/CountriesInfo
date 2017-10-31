@@ -30,7 +30,7 @@ public class ComponentsHelper {
     private static MyAppComponent appComponent;
     private static CountriesComponent countriesComponent;
     private static DetailCountryComponent detailCountryComponent;
-
+    
     private ComponentsHelper() {
     }
 

@@ -20,7 +20,7 @@ public class MyApp extends Application {
         super.onCreate();
         Logger.addLogAdapter(new AndroidLogAdapter());
         initRealm();
-//        initLeak();
+        initLeak();
         initAppComponent();
     }
 

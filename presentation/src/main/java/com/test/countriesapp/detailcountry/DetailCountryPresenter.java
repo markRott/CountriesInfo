@@ -29,7 +29,7 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
         super.onFirstViewAttach();
 
         getViewState().fillViews(model);
-        getViewState().startLoadFlag(model.getUrlForLoadFlag());
+        loadCountryFlagInSvgFormat(model.getUrlForLoadFlag());
     }
 
     @Override
