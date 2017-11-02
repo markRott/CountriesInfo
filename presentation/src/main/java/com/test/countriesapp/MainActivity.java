@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.test.countriesapp.base.BaseActivity;
 import com.test.countriesapp.base.IBackButtonListener;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
@@ -22,14 +23,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_holder);
 
         if (savedInstanceState == null) {
-            MyApp.initCountriesComponent();
+            ComponentsHelper.initCountriesComponent();
             navigator.applyCommand(new Replace(Const.ScreenKey.COUNTRIES, null));
         }
     }
 
     @Override
     public void inject() {
-        MyApp.getAppComponent().inject(this);
+        ComponentsHelper.getAppComponent().inject(this);
     }
 
     @Override

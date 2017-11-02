@@ -35,4 +35,8 @@ public class CountriesAdapter extends BaseRecyclerAdapter<CountryDomainModel, Co
         holder.tvCountryName.setText(model.getCountryName());
         setupItemTouchListener(holder.rootView, position, model);
     }
+
+    public void removeTochListener(){
+        setupItemTouchListener(null, 0, null);
+    }
 }

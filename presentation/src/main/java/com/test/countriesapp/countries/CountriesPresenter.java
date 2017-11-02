@@ -3,12 +3,13 @@ package com.test.countriesapp.countries;
 import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.example.BaseSubscriber;
 import com.example.models.CountryDomainModel;
 import com.example.usecases.CountriesUseCase;
+import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
-import com.test.countriesapp.MyApp;
 import com.test.countriesapp.base.BasePresenter;
-import com.example.BaseSubscriber;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 
 import java.util.List;
 
@@ -30,13 +31,31 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
 
     @Override
     public void inject() {
-        MyApp.getCountriesComponent().inject(this);
+        ComponentsHelper.getCountriesComponent().inject(this);
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         fetchCountries();
+    }
+
+    @Override
+    public void attachView(ICountriesView view) {
+        super.attachView(view);
+        Logger.e("CountriesPresenter attachView");
+    }
+
+    @Override
+    public void detachView(ICountriesView view) {
+        super.detachView(view);
+        Logger.e("CountriesPresenter detachView");
+    }
+
+    @Override
+    public void destroyView(ICountriesView view) {
+        super.destroyView(view);
+        Logger.e("CountriesPresenter destroyView");
     }
 
     public void openDetailScreen(CountryDomainModel data) {

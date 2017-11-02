@@ -17,6 +17,8 @@ public class CountryDomainModel implements Serializable {
     private String numericCode;
     private String alpha3Code;
 
+    private String urlForLoadFlag;
+
     public void setArea(float area) {
         this.area = area;
     }
@@ -81,6 +83,14 @@ public class CountryDomainModel implements Serializable {
         return alpha3Code;
     }
 
+    public String getUrlForLoadFlag() {
+        return urlForLoadFlag;
+    }
+
+    public void setUrlForLoadFlag(String urlForLoadFlag) {
+        this.urlForLoadFlag = urlForLoadFlag;
+    }
+
     @Override
     public String toString() {
         return "CountryDomainModel{" +
@@ -92,6 +102,7 @@ public class CountryDomainModel implements Serializable {
                 ", countryName='" + countryName + '\'' +
                 ", numericCode='" + numericCode + '\'' +
                 ", alpha3Code='" + alpha3Code + '\'' +
+                ", urlForLoadFlag='" + urlForLoadFlag + '\'' +
                 '}';
     }
 }

@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.models.CountryDomainModel;
-import com.test.countriesapp.MyApp;
 import com.test.countriesapp.R;
 import com.test.countriesapp.base.BaseDividerItemDecoration;
 import com.test.countriesapp.base.BaseFragment;
 import com.test.countriesapp.base.IRecyclerItemTouchListener;
 import com.test.countriesapp.countries.adapter.CountriesAdapter;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 import com.test.countriesapp.utils.CollectionsUtil;
 
 import java.util.ArrayList;
@@ -50,13 +50,17 @@ public class CountriesFragment extends BaseFragment
     CountriesPresenter countriesPresenter;
 
     public static CountriesFragment newInstance() {
-
         return new CountriesFragment();
+    }
+
+    public CountriesFragment() {
+        setRetainInstance(true);
     }
 
     @Override
     public void inject() {
-        MyApp.getCountriesComponent().inject(this);
+//        MyApp.getCountriesComponent().inject(this);
+        ComponentsHelper.getCountriesComponent().inject(this);
     }
 
     @Override
@@ -86,6 +90,16 @@ public class CountriesFragment extends BaseFragment
     public void onDestroyView() {
         super.onDestroyView();
         rcvCountries.setAdapter(null);
+    }
+
+    @Override
+    public void onDestroy() {
+        ComponentsHelper.clearCountriesComponent();
+        countriesAdapter.setItemTouchListener(null);
+        countriesAdapter = null;
+        pbCountries = null;
+        countriesPresenter = null;
+        super.onDestroy();
     }
 
     @Override

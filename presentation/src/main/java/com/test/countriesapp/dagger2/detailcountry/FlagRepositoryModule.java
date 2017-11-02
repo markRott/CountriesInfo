@@ -1,9 +1,12 @@
 package com.test.countriesapp.dagger2.detailcountry;
 
 import com.example.interfaces.ICountryFlagRepository;
+import com.example.models.CountryDomainModel;
+import com.example.sma.data.IApplicationApi;
 import com.example.sma.data.cache.lru.LruCacheForCountryFlagImpl;
 import com.example.sma.data.repositories.countryflag.CountryFlagRepositoryImpl;
 import com.example.sma.data.repositories.countryflag.FlagDataFactory;
+import com.orhanobut.logger.Logger;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,9 +19,19 @@ import dagger.Provides;
 public class FlagRepositoryModule {
 
     private final String flagUrl;
+    private final CountryDomainModel countryDomainModel;
 
-    public FlagRepositoryModule(String flagUrl) {
-        this.flagUrl = flagUrl;
+    public FlagRepositoryModule(final CountryDomainModel model) {
+        this.countryDomainModel = model;
+        flagUrl = buildFlagUrl();
+        Logger.i(flagUrl);
+        countryDomainModel.setUrlForLoadFlag(flagUrl);
+    }
+
+    @Provides
+    @DetailCountryScope
+    public CountryDomainModel provideCountryDomainModel() {
+        return countryDomainModel;
     }
 
     @Provides
@@ -33,4 +46,13 @@ public class FlagRepositoryModule {
 
         return new CountryFlagRepositoryImpl(flagUrl, flagDataFactory);
     }
+
+    private String buildFlagUrl() {
+        return new StringBuilder()
+                .append(IApplicationApi.BASE_URL_FOR_FLAG_IMAGE)
+                .append(countryDomainModel.getAlpha3Code().toLowerCase())
+                .append(IApplicationApi.SVG)
+                .toString();
+    }
+
 }

@@ -3,10 +3,11 @@ package com.test.countriesapp.detailcountry;
 import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.example.usecases.CountryFlagUseCase;
-import com.test.countriesapp.MyApp;
-import com.test.countriesapp.base.BasePresenter;
 import com.example.BaseSubscriber;
+import com.example.models.CountryDomainModel;
+import com.example.usecases.CountryFlagUseCase;
+import com.test.countriesapp.base.BasePresenter;
+import com.test.countriesapp.dagger2.ComponentsHelper;
 import com.test.countriesapp.utils.StringUtils;
 
 import javax.inject.Inject;
@@ -20,16 +21,20 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     @Inject
     CountryFlagUseCase countryFlagUseCase;
+    @Inject
+    CountryDomainModel model;
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().startLoadFlag();
+
+        getViewState().fillViews(model);
+        loadCountryFlagInSvgFormat(model.getUrlForLoadFlag());
     }
 
     @Override
     public void inject() {
-        MyApp.getDetailCountryComponent().inject(this);
+        ComponentsHelper.getDetailCountryComponent().inject(this);
     }
 
     void loadCountryFlagInSvgFormat(String alpha3Code) {

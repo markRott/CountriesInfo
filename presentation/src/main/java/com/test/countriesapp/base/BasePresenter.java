@@ -16,9 +16,4 @@ public abstract class BasePresenter<View extends IMvpViewWithUnauthorized> exten
 
     public void inject() {
     }
-
-//    protected boolean isUnauthorizeException(Throwable throwable) {
-//        return (((HttpException) throwable).code() == HttpURLConnection.HTTP_UNAUTHORIZED);
-//    }
-
 }
