@@ -38,7 +38,8 @@ public class InfoActivity extends BaseActivity implements IInfoView {
 
     @OnClick(R.id.btn_clear_cache)
     public void clickOnClearCache() {
-        infoPresenter.clearCache();
+//        infoPresenter.clearCache();
+        infoPresenter.clearData();
     }
 
     @Override

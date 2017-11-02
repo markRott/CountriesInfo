@@ -16,12 +16,24 @@ import io.realm.RealmResults;
 @InjectViewState
 public class InfoPresenter extends BasePresenter<IInfoView> {
 
-    public void clearCache() {
+    private boolean removeState = false;
+
+    public void clearData() {
         final Realm realm = RealmHolder.getInstance().getRealm();
-        realm.executeTransaction(new Realm.Transaction() {
+        realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm localRealm) {
                 tryDeleteDataFromDatabase(localRealm);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                getViewState().showClearDatabaseMessage(removeState);
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                Logger.d("clearData ", error.getMessage());
             }
         });
     }
@@ -30,9 +42,7 @@ public class InfoPresenter extends BasePresenter<IInfoView> {
         try {
             final RealmResults<CountryEntityForRealm> result =
                     localRealm.where(CountryEntityForRealm.class).findAll();
-            final boolean state = result.deleteAllFromRealm();
-            Logger.d("deleteAllFromRealm = %s", state);
-            getViewState().showClearDatabaseMessage(state);
+            removeState = result.deleteAllFromRealm();
         } catch (Exception ex) {
             Logger.d("tryDeleteDataFromDatabase exception = %s ", ex.getMessage());
         }
