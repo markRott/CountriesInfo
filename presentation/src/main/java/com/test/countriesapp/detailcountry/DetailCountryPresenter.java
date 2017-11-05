@@ -37,6 +37,13 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
         ComponentsHelper.getDetailCountryComponent().inject(this);
     }
 
+    @Override
+    public void destroy() {
+        model = null;
+        countryFlagUseCase.dispose();
+        countryFlagUseCase = null;
+    }
+
     void loadCountryFlagInSvgFormat(String alpha3Code) {
         if (countryFlagUseCase == null) return;
         if (StringUtils.isEmpty(alpha3Code)) return;

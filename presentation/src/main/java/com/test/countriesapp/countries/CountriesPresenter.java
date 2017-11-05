@@ -3,10 +3,8 @@ package com.test.countriesapp.countries;
 import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.example.BaseSubscriber;
 import com.example.models.CountryDomainModel;
 import com.example.usecases.CountriesUseCase;
-import com.orhanobut.logger.Logger;
 import com.test.countriesapp.Const;
 import com.test.countriesapp.base.BasePresenter;
 import com.test.countriesapp.dagger2.ComponentsHelper;
@@ -43,19 +41,22 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
     @Override
     public void attachView(ICountriesView view) {
         super.attachView(view);
-        Logger.e("CountriesPresenter attachView");
     }
 
     @Override
     public void detachView(ICountriesView view) {
         super.detachView(view);
-        Logger.e("CountriesPresenter detachView");
     }
 
     @Override
     public void destroyView(ICountriesView view) {
         super.destroyView(view);
-        Logger.e("CountriesPresenter destroyView");
+    }
+
+    @Override
+    public void destroy() {
+        countriesUseCase.dispose();
+        countriesUseCase = null;
     }
 
     public void openDetailScreen(CountryDomainModel data) {
@@ -65,7 +66,7 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
     public void fetchCountries() {
         if (countriesUseCase == null) return;
         getViewState().showProgressBar();
-        countriesUseCase.execute(new CountriesObserver(), null);
+        countriesUseCase.execute(new CountriesSubscriber(getViewState()), null);
     }
 
     public void openLoginScreen() {
@@ -86,18 +87,10 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
         getViewState().unauthorize();
     }
 
-    private final class CountriesObserver extends BaseSubscriber<List<CountryDomainModel>> {
-
-        @Override
-        public void onNext(List<CountryDomainModel> countryDomainModels) {
-            actionAfterSuccessResponse(countryDomainModels);
-        }
-
-        @Override
-        public void onError(Throwable t) {
-            super.onError(t);
-            actionAfterErrorResponse(t.getMessage());
-        }
+    private void illustrativeExampleWithRequestParams(){
+        final String estonia = "eesti";
+        final CountriesUseCase.Params params = CountriesUseCase.Params.buildParams(estonia);
+//        countriesUseCase.execute(new CountriesSubscriber(getViewState()), params);
     }
 
     @VisibleForTesting
