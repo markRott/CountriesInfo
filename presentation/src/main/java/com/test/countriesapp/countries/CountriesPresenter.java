@@ -87,6 +87,12 @@ public class CountriesPresenter extends BasePresenter<ICountriesView> {
         getViewState().unauthorize();
     }
 
+    private void illustrativeExampleWithRequestParams(){
+        final String estonia = "eesti";
+        final CountriesUseCase.Params params = CountriesUseCase.Params.buildParams(estonia);
+//        countriesUseCase.execute(new CountriesSubscriber(getViewState()), params);
+    }
+
     @VisibleForTesting
     public void setRouter(Router router) {
         this.router = router;
