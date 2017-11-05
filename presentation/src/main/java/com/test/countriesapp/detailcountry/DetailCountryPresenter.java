@@ -39,8 +39,8 @@ public class DetailCountryPresenter extends BasePresenter<IDetailCountryView> {
 
     @Override
     public void destroy() {
-        countryFlagUseCase.dispose();
         model = null;
+        countryFlagUseCase.dispose();
         countryFlagUseCase = null;
     }
 
