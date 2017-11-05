@@ -1,5 +1,7 @@
 package com.test.countriesapp.countries;
 
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.models.CountryDomainModel;
 import com.test.countriesapp.base.IMvpViewWithUnauthorized;
 
@@ -19,5 +21,6 @@ public interface ICountriesView extends IMvpViewWithUnauthorized {
 
     void hideErrorMessage();
 
+    @StateStrategyType(value = OneExecutionStateStrategy.class)
     void renderCountriesList(Collection<CountryDomainModel> countryList);
 }

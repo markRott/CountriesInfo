@@ -8,6 +8,9 @@ import com.arellomobile.mvp.MvpPresenter;
 
 public abstract class BasePresenter<View extends IMvpViewWithUnauthorized> extends MvpPresenter<View> {
 
+
+    public abstract void destroy();
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();

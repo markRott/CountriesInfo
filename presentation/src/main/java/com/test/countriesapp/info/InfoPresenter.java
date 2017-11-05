@@ -18,6 +18,10 @@ public class InfoPresenter extends BasePresenter<IInfoView> {
 
     private boolean removeState = false;
 
+    @Override
+    public void destroy() {
+    }
+
     public void clearData() {
         final Realm realm = RealmHolder.getInstance().getRealm();
         realm.executeTransactionAsync(new Realm.Transaction() {

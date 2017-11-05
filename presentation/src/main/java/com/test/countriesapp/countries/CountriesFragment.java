@@ -59,7 +59,6 @@ public class CountriesFragment extends BaseFragment
 
     @Override
     public void inject() {
-//        MyApp.getCountriesComponent().inject(this);
         ComponentsHelper.getCountriesComponent().inject(this);
     }
 
@@ -94,6 +93,7 @@ public class CountriesFragment extends BaseFragment
 
     @Override
     public void onDestroy() {
+        countriesPresenter.destroy();
         ComponentsHelper.clearCountriesComponent();
         countriesAdapter.setItemTouchListener(null);
         countriesAdapter = null;

@@ -2,6 +2,7 @@ package com.example.usecases;
 
 import com.example.interfaces.ICountryFlagRepository;
 import com.example.interfaces.IPostExecutionThread;
+import com.example.usecases.base.BaseFlowableUseCase;
 
 import io.reactivex.Flowable;
 
@@ -9,7 +10,7 @@ import io.reactivex.Flowable;
  * Created by sma on 17.10.17.
  */
 
-public class CountryFlagUseCase extends BaseUseCase<byte[], Void> {
+public class CountryFlagUseCase extends BaseFlowableUseCase<byte[], Void> {
 
     private final ICountryFlagRepository repository;
 
@@ -18,8 +19,11 @@ public class CountryFlagUseCase extends BaseUseCase<byte[], Void> {
         this.repository = repository;
     }
 
+    /**
+     * Do not need to call
+     */
     @Override
-    Flowable<byte[]> buildUseCaseObservable(Void aVoid) {
+    public Flowable<byte[]> buildUseCaseObservable(Void aVoid) {
 
         return repository.getCountryFlagByteArray();
     }

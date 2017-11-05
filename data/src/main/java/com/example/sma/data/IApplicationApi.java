@@ -6,6 +6,8 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 
 /**
  * Created by sma on 10.10.17.
@@ -20,4 +22,8 @@ public interface IApplicationApi {
     //    @GET("http://www.mocky.io/v2/59ee79833300008339b5c917")
     @GET(BASE_URL + "rest/v2/all")
     Flowable<List<CountryEntity>> fetchAllCountries();
+
+    @GET(BASE_URL + "rest/v2/all")
+    @Multipart
+    Flowable<List<CountryEntity>> aaa(@Header("asdasd") String name );
 }
