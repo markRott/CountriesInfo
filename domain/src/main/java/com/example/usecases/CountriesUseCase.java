@@ -22,9 +22,6 @@ public class CountriesUseCase extends BaseFlowableUseCase<List<CountryDomainMode
         this.countryRepository = repository;
     }
 
-    /**
-     * Do not need to call
-     */
     @Override
     public Flowable<List<CountryDomainModel>> buildUseCaseObservable(Void emptyParams) {
         //
