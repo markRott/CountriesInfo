@@ -19,9 +19,6 @@ public class CountryFlagUseCase extends BaseFlowableUseCase<byte[], Void> {
         this.repository = repository;
     }
 
-    /**
-     * Do not need to call
-     */
     @Override
     public Flowable<byte[]> buildUseCaseObservable(Void aVoid) {
 
