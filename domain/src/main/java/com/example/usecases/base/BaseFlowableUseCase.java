@@ -23,9 +23,7 @@ public abstract class BaseFlowableUseCase<T, Params> extends BaseUseCase {
      */
     public void execute(final DisposableSubscriber<T> disposableSubscriber, final Params params) {
         final Flowable<T> flowable = getFlowable(params);
-        addDisposable(
-                flowable.subscribeWith(disposableSubscriber)
-        );
+        addDisposable(flowable.subscribeWith(disposableSubscriber));
     }
 
     private Flowable<T> getFlowable(final Params params) {
