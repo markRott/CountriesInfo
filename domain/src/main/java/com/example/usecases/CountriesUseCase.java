@@ -24,14 +24,12 @@ public class CountriesUseCase extends BaseFlowableUseCase<List<CountryDomainMode
 
     @Override
     public Flowable<List<CountryDomainModel>> buildUseCaseObservable(Void emptyParams) {
-        //
         return countryRepository.getCountries();
     }
 
 
     public static final class Params {
 
-        // https://restcountries.eu/rest/v2/name/{name}
         private String name;
 
         private Params(final String name) {
