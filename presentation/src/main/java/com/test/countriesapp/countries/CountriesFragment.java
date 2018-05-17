@@ -130,7 +130,6 @@ public class CountriesFragment extends BaseFragment
 
     @Override
     public void renderCountriesList(Collection<CountryDomainModel> countryList) {
-        System.out.println("countryList = " + countryList);
         if (CollectionsUtil.isNullOrEmpty(countryList)) return;
         countriesAdapter.setData(new ArrayList<>(countryList));
         countriesAdapter.setItemTouchListener(this);
