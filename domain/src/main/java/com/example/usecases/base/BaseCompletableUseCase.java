@@ -20,11 +20,7 @@ public abstract class BaseCompletableUseCase<Params> extends BaseUseCase {
 
     public void execute(final DisposableCompletableObserver completableObserver, final Params params) {
         final Completable completable = getCompletable(params);
-
-        addDisposable(
-                //
-                completable.subscribeWith(completableObserver)
-        );
+        addDisposable(completable.subscribeWith(completableObserver));
     }
 
     private Completable getCompletable(final Params params) {
@@ -32,5 +28,4 @@ public abstract class BaseCompletableUseCase<Params> extends BaseUseCase {
                 .subscribeOn(Schedulers.io())
                 .observeOn(mainThread.getScheduler());
     }
-
 }
