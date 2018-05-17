@@ -21,11 +21,7 @@ public abstract class BaseSingleUseCase<T, Params> extends BaseUseCase {
 
     public void execute(final DisposableSingleObserver<T> singleObserver, final Params params) {
         final Single<T> single = getSingle(params);
-
-        addDisposable(
-                //
-                single.subscribeWith(singleObserver)
-        );
+        addDisposable(single.subscribeWith(singleObserver));
     }
 
     private Single<T> getSingle(final Params params) {
