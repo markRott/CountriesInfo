@@ -31,23 +31,13 @@ public interface IApplicationApi {
     String BASE_URL = "https://restcountries.eu/";
     String BASE_URL_FOR_FLAG_IMAGE = "https://restcountries.eu/data/";
 
-    //@GET — принимает параметры с @Query, @Path и @QueryMap.
-
-    /**
-     * @POST, @PUT, @DELETE — принимает параметры типа @Part, @Field и @Body. Тут есть еще один нюанс.
-     * @Part мы можем использовать только с параметром @Multipart,
-     * а @Field с параметром @FormUrlEncoded. Наоборот нельзя, потому что они работают только в паре.
-     */
-
-    //    @GET("http://www.mocky.io/v2/59ee79833300008339b5c917")
+//  @GET("http://www.mocky.io/v2/59ee79833300008339b5c917")
     @GET(BASE_URL + "rest/v2/all")
     Flowable<List<CountryEntity>> fetchAllCountries();
 
-    // http://www.umori.li/api/get?name=bash&num=50
     @GET("http://www.umori.li/api/")
     Single<Object> getData(@Query("name") String name, @Query("num") int num);
 
-    //users/{user}/repos
     @GET("users/{user}/repos")
     Single<Object> getData1(@Path("user") String userName);
 
@@ -59,16 +49,10 @@ public interface IApplicationApi {
     @POST("some/endpoint")
     Single<Object> uploadImage(@Part("image") RequestBody image, @Part("description") RequestBody description);
 
-
-    // При использовании пары "имя/значение" в POST-запросах применяется аннотации
-    // @FormUrlEncoded и @FieldMap:
     @FormUrlEncoded
     @POST("/some/endpoint")
     Single<Object> someEndpoint(@FieldMap Map<String, String> names);
 
-
-    //динамические адреса
     @GET
     public Call<File> getZipFile(@Url String url);
-
 }
