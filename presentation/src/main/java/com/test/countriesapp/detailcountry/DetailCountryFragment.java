@@ -107,13 +107,11 @@ public class DetailCountryFragment extends BaseFragment implements IDetailCountr
 
     @Override
     public void fillViews(final CountryDomainModel model) {
-        System.out.println("model = " + model);
         tvCountryName.setText(String.format(getString(R.string.country_name), model.getCountryName()));
         tvCapital.setText(String.format(getString(R.string.capital), model.getCapital()));
         tvCountryRegion.setText(String.format(getString(R.string.country_region), model.getRegion()));
         tvCountryArea.setText(String.format(getString(R.string.country_area), String.valueOf(model.getArea())));
-        tvCountryPopulation.setText(String.format(getString(R.string.population),
-                String.valueOf(model.getPopulation())));
+        tvCountryPopulation.setText(String.format(getString(R.string.population), String.valueOf(model.getPopulation())));
         tvCountryNumericCode.setText(String.format(getString(R.string.numeric_code), model.getNumericCode()));
     }
 
